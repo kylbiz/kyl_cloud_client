@@ -38,7 +38,7 @@ AutoForm.hooks({
     },
     onSuccess: function(formType, result) {
       if(result) {
-        Router.go('/usercenter');
+        Router.go('/user/registration');
       }
     }
   }

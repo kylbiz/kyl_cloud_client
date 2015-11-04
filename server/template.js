@@ -861,13 +861,3 @@ function HandlePDTemplate(registrationOptions, callback) {
 
 }
 
-
-
-
-
-
-
-
-
-
-

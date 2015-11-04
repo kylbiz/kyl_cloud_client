@@ -7,7 +7,23 @@ Template.CompanyDetail.helpers({
     var company =  Company.findOne({docId: docId});
     return company;
   }
-})
+});
+
+Template.usercenter.helpers({
+  "useremail": function() {
+    if(Meteor.user() && Meteor.user().emails) {
+      return Meteor.user().emails[0].address;
+    }
+  }
+});
+
+Template.usercheck.helpers({
+  "useremail": function() {
+    if(Meteor.user() && Meteor.user().emails) {
+      return Meteor.user().emails[0].address;
+    }
+  }
+});
 
 
 Template.CompanyDetail.events({

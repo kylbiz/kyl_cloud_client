@@ -4,29 +4,25 @@ auto fill word template client for my own program
 
 
 #### modules
-meteor version： `Meteor 1.2.0.2`
+meteor version： `Meteor 1.1.0.3`
 
 
 ```shell
-aldeed:autoform       5.6.0  Easily create forms with automatic insert and up...
-aldeed:collection2    2.5.0  Automatic validation of insert and update operat...
-aldeed:simple-schema  1.3.3  A simple schema validation object with reactivit...
-blaze-html-templates  1.0.1  Compile HTML templates into reactive UI with Met...
-ecmascript            0.1.5  Compiler plugin that supports ES2015+ in all .js...
-es5-shim              4.1.13  Shims and polyfills to improve ECMAScript 5 sup...
-http                  1.1.1  Make HTTP calls to remote servers
-insecure              1.0.4  (For prototyping only) Allow all database writes...
-iron:router           1.0.10  Routing specifically designed for Meteor
-jquery                1.11.4  Manipulate the DOM using CSS selectors
-meteor-base           1.0.1  Packages that every Meteor app needs
-meteorhacks:npm       1.5.0  Use npm modules with your Meteor App
-mobile-experience     1.0.1  Packages for a great mobile user experience
-momentjs:moment       2.10.6  Moment.js (official): parse, validate, manipula...
-mongo                 1.1.2  Adaptor for using MongoDB and Minimongo over DDP
-npm-container         1.2.0+ Contains all your npm dependencies
-session               1.1.1  Session variable
-standard-minifiers    1.0.1  Standard minifiers used with Meteor apps by defa...
-tracker               1.0.9  Dependency tracker to allow reactive callbacks
+accounts-password            1.1.1* Password support for accounts
+aldeed:autoform              5.5.1* Easily create forms with automatic insert and update, and automatic reactive validation.
+aldeed:collection2           2.5.0  Automatic validation of insert and update operations on the client and server.
+dburles:collection-helpers   1.0.3* Transform your collections with helpers that you define
+ephemer:reactive-datatables  1.1.0  Fast and reactive jQuery DataTables using standard Cursors / DataTables API. Supports Bootstrap 3.
+http                         1.1.0* Make HTTP calls to remote servers
+insecure                     1.0.3* Allow all database writes by default
+iron:router                  1.0.9* Routing specifically designed for Meteor
+joshowens:accounts-entry     1.0.3  Make signin and signout their own pages with routes.
+jquery                       1.11.3_2* Manipulate the DOM using CSS selectors
+meteor-platform              1.2.2* Include a standard set of Meteor packages in your app
+meteorhacks:npm              1.5.0  Use npm modules with your Meteor App
+momentjs:moment              2.10.6  Moment.js (official): parse, validate, manipulate, and display dates - official Meteor packaging
+npm-container                1.2.0+ Contains all your npm dependencies
+twbs:bootstrap               3.3.5  The most popular front-end framework for developing responsive, mobile first projects on the web.
 
 ```
 
