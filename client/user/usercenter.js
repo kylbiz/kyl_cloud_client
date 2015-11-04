@@ -24,9 +24,10 @@ var optionsObject = {
     },
     {
       title: '操作',
+      className: 'text-center',
       render: function(cellData, renderType, currentRow) {
-        var html = '<a href="/user/company/' + currentRow.docId +   '" class="viewCompany"><input type="button" value="查看" class="btn"></a>'
-         + '<input type="button" data-docid="' + currentRow.docId + '" value="删除" class="btn companyitem">'
+        var html = '<a href="/user/company/' + currentRow.docId +   '" class="viewCompany"><input type="button" value="查看" class="btn btn-primary"></a>'
+         + '<button type="button" data-docid="' + currentRow.docId + '"class="btn btn-danger companyitem">删除</button>'
         return html; 
       }
 

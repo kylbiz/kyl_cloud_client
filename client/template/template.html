@@ -1,15 +1,26 @@
 <template name="template">
-  <h2>OFFICE File</h2>
-  <div>
-
+<div class="panel panel-default">
+  <div class="panel-heading">OFFICE File</div>
+  <div class="panel-body">
+    <div class="col-sm-12">
     {{#each handleResults}}
-      <div style="margin:20px;">
-        <p>{{cnLabel}}</p>
-        <a href="{{pdfURI}}" download="{{cnLabel}}"><input type="button" value="PDF"></a>
-        <a href="{{wordURI}}" download="{{cnLabel}}"><input type="button" value="WORD"></a>
-        <a href="{{pdfURI}}"><input type="button" value="在线阅读"></a>
-        <br>
+    <div class="row o-group">
+      <div class="list-group-horizonal">
+        <div class="text-center">
+          <h4>{{cnLabel}}</h4>
+        </div>
+        <div class="list-group-item"><a href="{{pdfURI}}" target="_blank">在线阅读</a>
+        </div>
+        <div class="list-group-item"><a href="{{pdfURI}}" download="{{cnLabel}}">下载pdf</a>
+        </div>
+        <div class="list-group-item"><a href="{{wordURI}}" download="{{cnLabel}}">下载word</a>
+        </div>
+        <div class="list-group-item"><a href="#">打印</a>
+        </div>
       </div>
+    </div>
     {{/each}}
+    </div>
+  </div>
   </div>
 </template>
