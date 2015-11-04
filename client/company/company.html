@@ -1,5 +1,5 @@
 <template name="companyTemplate">
-  <div>
+  <div class="row">
     <h1 align="center">备案信息录入</h1>
     {{#autoForm collection="Company" id="CompanyInsert" type="insert" trimStrings=true}}
       {{> company}}                
@@ -62,7 +62,7 @@
       <div class="col-md-6"> {{> afQuickField name='financialStaff' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}</div>
      </div>
          {{> afQuickField name="authorizationFlag"}}
-      <input type="submit" class="btn" value="立即提交" />
+      <input type="submit" class="btn btn-primary" value="立即提交" />
     </div>
   </div>
 </div>

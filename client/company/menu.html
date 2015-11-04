@@ -1,14 +1,56 @@
 <template name="menu">
-  <div class="docLists">
-    <h2>小白云 OFFICE 模板系统</h2>
-    <div>
-      <ul class="docs">
-        <li><a href="/check">企业名称预先核准申请书表单</a></li>
-        <li><a href="/company">核名后信息填充</a></li>
-      </ul>     
-    </div>
-  </div>
-  <div class="user">
-    <a href="/usercenter"><input type="button" class="viewuser btn" value="我的小白云"></a>    
-  </div>
+<style>
+html,body {
+ height: 100%; 
+}
+#main-content {
+ height: 100%; 
+ padding: 0;
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+}
+.container {
+ height: 100%;   
+}
+.main_table {
+ height: 100%;
+ width: 100%;
+}
+</style>
+ <table class="main_table">
+   <tbody>
+     <tr>
+       <td>
+ <div class="center">
+  <h1 class="text-center">小白云 OFFICE 模板系统</h1>
+  <div class="o-menu-list">
+  <ul class="pricing_table row">
+    <li class="price_block_static col-md-4 col-xs-11">
+      <h3>核名后信息填充</h3>
+      <div class="footer">
+        <a href="/company" class="btn btn-default">填写</a>
+      </div>
+    </li>    
+    <li class="price_block_static active col-md-4 col-xs-11">
+      <h3>企业名称预先核准<br>申请书表单      
+      </h3>
+      <div class="footer">
+        <a href="/check" class="btn btn-default">填写</a>
+      </div>
+    </li>   
+    <li class="price_block_static col-md-4 col-xs-11">
+      <h3>我的小白云</h3>
+      <div class="footer">
+        <a href="/usercenter" class="btn btn-danger">查看</a>
+      </div>
+    </li>        
+  </ul>    
+  </div>     
+ </div>         
+       </td>
+     </tr>
+   </tbody>
+ </table>
 </template>
