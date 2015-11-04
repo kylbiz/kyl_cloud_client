@@ -1,5 +1,5 @@
 <template name="checkDetail">
-  <div class="NameCheck" style="margin: 40px">
+  <div class="NameCheck row">
 
     <h1 align="center">企业名称预先核准申请书</h1>
     {{#autoForm collection="NameCheck" id="CheckUpdate" type="update" doc=checkValue}}
@@ -15,8 +15,8 @@
 
 
        {{> afQuickField name="authorizationFlag"}}
-        <input type="submit" class="btn" value="立即提交" />
-        <input type="button" class="btn template" value="生成模板" />
+        <input type="submit" class="btn btn-primary" value="立即提交" />
+        <input type="button" class="btn template btn-primary" value="生成模板" />
     {{/autoForm}}
   </div>
 </template>

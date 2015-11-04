@@ -1,11 +1,21 @@
-<template name="usercheck">
-  <div class="panel panel-default">
+<template name="usercheck">  
+    <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">用户邮箱：15026555606@qq.com</h3> </div>
+      <h3 class="panel-title clearfix"><span class="pull-left">个人中心</span><span class="pull-right">邮箱：15026555606@qq.com</span></h3> </div>   
+    <div class="panel-body">
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="user/check">核名文档</a>
+          </li>
+          <li><a href="/usercenter">备案文档</a>
+          </li>
+        </ul>
+      </div>     
+    </div>
     <div class="panel-body">
       {{> checkList}}
-    </div>
-  </div>  
+    </div>     
+  </div>
 </template>
 
 
