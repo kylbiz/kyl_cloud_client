@@ -1,0 +1,22 @@
+<template name="checkDetail">
+  <div class="NameCheck" style="margin: 40px">
+
+    <h1 align="center">企业名称预先核准申请书</h1>
+    {{#autoForm collection="NameCheck" id="CheckUpdate" type="update" doc=checkValue}}
+      {{> afQuickField name='company' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}   
+       
+      {{> afQuickField name="addressFlag"}} 
+      {{#if afFieldValueIs name="addressFlag" value="自己提供地址"}} 
+        {{> afQuickField name="companyAddress" template="bootstrap3-inline" afFieldInput-placeholder="schemaLabel"}} 
+      {{/if}}
+      
+      {{> afQuickField name='holders' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}
+
+
+
+       {{> afQuickField name="authorizationFlag"}}
+        <input type="submit" class="btn" value="立即提交" />
+        <input type="button" class="btn template" value="生成模板" />
+    {{/autoForm}}
+  </div>
+</template>

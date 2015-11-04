@@ -1,0 +1,71 @@
+<template name="CompanyDetail">
+  <div>
+    <h1 align="center">备案详细信息</h1>
+    {{#autoForm collection="Company" id="CompanyUpdate" type="update" doc=companyValue}}
+      {{> companyUpdate}}                
+    {{/autoForm}}
+  </div>
+</template> 
+
+
+<template name="companyUpdate">
+<div class="col-sm-12">
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{> afQuickField name='company' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}
+      </div>
+      <div class="panel-footer">
+        {{> afQuickField name="addressFlag" options="allowed" firstOption="选择公司地址提供方式"}} 
+          {{#if afFieldValueIs name="addressFlag" value="自己提供地址"}} 
+            {{> afQuickField name="companyAddress" template="bootstrap3-inline" afFieldInput-placeholder="schemaLabel"}} 
+          {{> afQuickField name="productionAddress" template="bootstrap3-inline" afFieldInput-placeholder="schemaLabel"}} 
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+     {{> afQuickField name='legalPerson' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}
+     {{> afQuickField name='supervisor' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}
+      </div>
+    </div>
+  </div>     
+</div>
+</div>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{> afQuickField name='holders' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}
+    </div>
+  </div>
+</div>
+ 
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+     <div class="row">
+     
+      <div class="col-md-6">{{> afQuickField name='chairman' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}</div>
+      <div class="col-md-6">{{> afQuickField name='manager' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}</div>
+     </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+     <div class="row">
+      <div class="col-md-6">{{> afQuickField name='contractor' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}</div>
+      <div class="col-md-6"> {{> afQuickField name='financialStaff' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}</div>
+     </div>
+         {{> afQuickField name="authorizationFlag"}}
+      <input type="submit" class="btn" value="立即提交" />
+      <input type="button" class="btn template" value="生成模板" />
+    </div>
+  </div>
+</div>
+</template>

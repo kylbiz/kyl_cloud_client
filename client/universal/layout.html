@@ -1,0 +1,41 @@
+<template name="layout">
+  <header class="navigation">
+    <div class="container">
+      <div class="navbar-left">
+        <ul class="navbar-nav">
+          <li>
+            <a href="/">首页</a>
+          </li>
+          <li>
+            <a href="/check">预先核名</a>
+          </li>
+          <li>
+            <a href="/company">备案</a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-right">
+        <ul class="navbar-nav">
+          {{#if currentUser}}
+            <li><a href="/usercenter" class="usercenter">个人中心</a></li>
+            <li><a href="/sign-out">退出</a></li>
+          {{else}}
+          <li><a href="/sign-in">登录</a></li>
+          <li><a href="/sign-up">注册</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </header>
+<section id="main-content">
+  <div class="container">
+        {{> yield}}
+  </div>
+</section>  
+</template>
+
+
+<template name="slim">
+  {{> yield}}
+</template>

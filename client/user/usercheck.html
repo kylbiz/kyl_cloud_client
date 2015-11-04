@@ -1,0 +1,15 @@
+<template name="usercheck">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">用户邮箱：15026555606@qq.com</h3> </div>
+    <div class="panel-body">
+      {{> checkList}}
+    </div>
+  </div>  
+</template>
+
+
+
+<template name="checkList">
+  {{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject }} 
+</template>

@@ -1,0 +1,15 @@
+<template name="template">
+  <h2>OFFICE File</h2>
+  <div>
+
+    {{#each handleResults}}
+      <div style="margin:20px;">
+        <p>{{cnLabel}}</p>
+        <a href="{{pdfURI}}" download="{{cnLabel}}"><input type="button" value="PDF"></a>
+        <a href="{{wordURI}}" download="{{cnLabel}}"><input type="button" value="WORD"></a>
+        <a href="{{pdfURI}}"><input type="button" value="在线阅读"></a>
+        <br>
+      </div>
+    {{/each}}
+  </div>
+</template>
