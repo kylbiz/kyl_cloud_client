@@ -255,6 +255,7 @@ function HandleHKTemplate(registrationOptions, callback) {
   var chairmanType = chairman.chairmanType;
   var chairmanIDType = chairman.chairmanIDType;
   var chairmanID = chairman.chairmanID;
+  var chairmanPhone = chairman.chairmanPhone;
 
   var supervisor = registration.supervisor;
   var supervisorName = supervisor.supervisorName;

@@ -38,6 +38,7 @@ AutoForm.hooks({
     },
     onSuccess: function(formType, result) {
       if(result) {
+        alert("提交成功！")
         Router.go('/user/registration');
       }
     }
