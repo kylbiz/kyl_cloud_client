@@ -66,16 +66,11 @@ var companySchema = new SimpleSchema({
   },
   'company.companyTel': {
     type: String,
-    label: '联系电话（必填）',
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }    
+    label: '联系电话（必填）'    
   },
   'company.moneyAmount': {
     type: Number,
-    label: '注册资本(万元)' 
+    label: '注册资本(单位：万元，必填)' 
   },
   'company.businessScope': {
     type: String,
@@ -141,21 +136,11 @@ var companySchema = new SimpleSchema({
   "legalPerson.legalPersonTel": {
     type: String,
     label: '固定电话',
-    optional: true,   
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }    
+    optional: true   
   },
   "legalPerson.legalPersonPhone": {
     type: String,
-    label: '移动电话（必填）',
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }    
+    label: '移动电话（必填）'   
   },
   "legalPerson.legalPersonEmail": {
     type: String,
@@ -378,22 +363,12 @@ var companySchema = new SimpleSchema({
   "contractor.contractorTel": {
     type: String,
     label: '固定电话',
-    optional: true, 
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }    
+    optional: true  
   },
   "contractor.contractorPhone": {
     type: String,
     label: '移动电话',
-    optional: true, 
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }      
+    optional: true      
   },
   "contractor.contractorEmail": {
     type: String,
@@ -438,22 +413,12 @@ var companySchema = new SimpleSchema({
   "financialStaff.financialStallTel": {
     type: String,
     label: '固定电话',
-    optional: true,   
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }    
+    optional: true    
   },
   "financialStaff.financialStaffPhone": {
     type: String,
     label: '移动电话',
-    optional: true,  
-    autoform: {
-      afFieldInput: {
-        type: "number"
-      }
-    }      
+    optional: true     
   },
   "financialStaff.financialStaffEmail": {
     type: String,
