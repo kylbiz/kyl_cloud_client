@@ -19,16 +19,16 @@ SimpleSchema._globalMessages = {
   expectedObject: "[label] 必须是一个对象",
   expectedConstructor: "[label] 必须是一个 [type]",
   regEx: [
-    {msg: "[label] failed regular expression validation"},
-    {exp: SimpleSchema.RegEx.Email, msg: "[label] must be a valid e-mail address"},
-    {exp: SimpleSchema.RegEx.WeakEmail, msg: "[label] must be a valid e-mail address"},
-    {exp: SimpleSchema.RegEx.Domain, msg: "[label] must be a valid domain"},
-    {exp: SimpleSchema.RegEx.WeakDomain, msg: "[label] must be a valid domain"},
-    {exp: SimpleSchema.RegEx.IP, msg: "[label] must be a valid IPv4 or IPv6 address"},
-    {exp: SimpleSchema.RegEx.IPv4, msg: "[label] must be a valid IPv4 address"},
-    {exp: SimpleSchema.RegEx.IPv6, msg: "[label] must be a valid IPv6 address"},
-    {exp: SimpleSchema.RegEx.Url, msg: "[label] must be a valid URL"},
-    {exp: SimpleSchema.RegEx.Id, msg: "[label] must be a valid alphanumeric ID"}
+    {msg: "[label] 错误正则表达式"},
+    {exp: SimpleSchema.RegEx.Email, msg: "[label] 必须是一个合法的 EMAIL 地址"},
+    {exp: SimpleSchema.RegEx.WeakEmail, msg: "[label] 必须是一个合法的 EMAIL 地址"},
+    {exp: SimpleSchema.RegEx.Domain, msg: "[label] 必须是一个合法域名"},
+    {exp: SimpleSchema.RegEx.WeakDomain, msg: "[label] 必须是一个合法域名"},
+    {exp: SimpleSchema.RegEx.IP, msg: "[label] 必须是合法的IPV4或IPV6地址"},
+    {exp: SimpleSchema.RegEx.IPv4, msg: "[label] 必须是合法的IPV4地址"},
+    {exp: SimpleSchema.RegEx.IPv6, msg: "[label] m必须是合法的IPV6地址"},
+    {exp: SimpleSchema.RegEx.Url, msg: "[label] 必须是一个合法的URL"},
+    {exp: SimpleSchema.RegEx.Id, msg: "[label] 必须是一个合法的ID"}
   ],
-  keyNotInSchema: "[label] is not allowed by the schema"
+  keyNotInSchema: "[label] 不被schema接受"
 };    
