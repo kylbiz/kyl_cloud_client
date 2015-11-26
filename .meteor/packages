@@ -11,11 +11,9 @@ insecure
 iron:router
 twbs:bootstrap
 aldeed:collection2
-joshowens:accounts-entry
 aldeed:autoform
 meteorhacks:npm
 npm-container
-accounts-ui
 accounts-password
 momentjs:moment
 ephemer:reactive-datatables

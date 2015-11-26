@@ -10,3 +10,7 @@ Meteor.publish('getCompany', function() {
   return Company.find({"productType": "registration"});
 })
 
+Meteor.publish('getDocNum', function() {
+  return DocNum.find({});
+})
+

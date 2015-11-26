@@ -1,4 +1,4 @@
-Meteor.subscribe('getCompany')
+Meteor.subscribe('checkInfo')
 
 var optionsObject = {
   columns: [
@@ -24,10 +24,10 @@ var optionsObject = {
     },
     {
       title: '操作',
-      className: 'text-center',
+      className: 'text-center',      
       render: function(cellData, renderType, currentRow) {
-        var html = '<a href="/user/company/' + currentRow.docId +   '" class="viewCompany"><input type="button" value="查看" class="btn btn-primary"></a>'
-         + '<button type="button" data-docid="' + currentRow.docId + '"class="btn btn-danger companyitem">删除</button>'
+        var html = '<a href="/user/check/' + currentRow.docId +   '" class="viewCompany"><input type="button" value="查看" class="btn btn-primary"></a>'
+         + '<button type="button" data-docid="' + currentRow.docId + '"class="btn btn-danger checkItem">删除</button>'
         return html; 
       }
 
@@ -35,12 +35,12 @@ var optionsObject = {
   ]
 }
 
-dataTableData = function (userId) {
+var dataTableData = function (userId) {
     var userId = Session.get('userId');
-    return Company.find({userId: userId}).fetch(); // or .map()
+    return NameCheck.find({userId: userId}).fetch(); // or .map()
 };
 
-Template.companyList.helpers({
+Template.checkList.helpers({
     reactiveDataFunction: function () {
       var userId = Session.get('userId');
         return dataTableData;
@@ -48,8 +48,8 @@ Template.companyList.helpers({
     optionsObject: optionsObject // see below
 });
 
-Template.companyList.events({
-  "click .companyitem": function(event) {
+Template.checkList.events({
+  "click .checkItem": function(event) {
     var userId = Meteor.userId();
     var docId = $(event.currentTarget).attr("data-docid");
     if(userId && docId) {
@@ -57,7 +57,7 @@ Template.companyList.events({
         userId: userId,
         docId: docId
       };
-      Meteor.call("deleteCompany", options);
+      Meteor.call("deleteCheck", options);
     }
   }
 })

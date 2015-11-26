@@ -1,7 +1,8 @@
 HandleResults = new Mongo.Collection('HandleResults');
 
 NameCheck = new Mongo.Collection("NameCheck");
-
+DocNum = new Mongo.Collection("DocNum");
+Feedback = new Mongo.Collection("Feedback");
 
 NameCheck.attachSchema(new SimpleSchema({
   userId: {

@@ -1,5 +1,5 @@
 var querystring = Meteor.npmRequire('querystring')
-var requestUrl = 'http://192.168.0.100/docgen/';
+var requestUrl = 'http://114.80.9.19:8801/docgen/';
 
 function log(info) {
   var len = arguments.length;
@@ -22,9 +22,6 @@ function handleProportion(numerator, denominator) {
     return num.toFixed(2) + '%';
   }
 }
-
-
-
 
 /**
  * @param  {Object} an object to handle
@@ -255,6 +252,7 @@ function HandleHKTemplate(registrationOptions, callback) {
   var chairmanType = chairman.chairmanType;
   var chairmanIDType = chairman.chairmanIDType;
   var chairmanID = chairman.chairmanID;
+  var chairmanPhone = chairman.chairmanPhone;
 
   var supervisor = registration.supervisor;
   var supervisorName = supervisor.supervisorName;
@@ -520,10 +518,12 @@ function HandleHKTemplate(registrationOptions, callback) {
               callback(err, null);
             } else {
               log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db succeed!');
+              callback(null, null);
             }
           })
         } else {
-          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err)
+          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err);
+          callback(err, null);
         } 
       })
     })
@@ -851,23 +851,15 @@ function HandlePDTemplate(registrationOptions, callback) {
               callback(err, null);
             } else {
               log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db succeed!');
+              callback(null, null);
             }
           })
         } else {
-          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err)
+          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err);
+          callback(null, null);
         } 
       })
     })
 
 }
-
-
-
-
-
-
-
-
-
-
 
