@@ -67,7 +67,7 @@ Template.usercheck.helpers({
     if (user && user.hasOwnProperty("username")) {
       return Meteor.user().username
     } else if (user && user.hasOwnProperty("emails")) {
-      return Meteor.user.emails[0].address;
+      return user.emails[0].address;
     } else {
       return Meteor.userId();
     }
