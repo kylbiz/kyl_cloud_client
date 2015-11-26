@@ -60,7 +60,7 @@ NameCheck.attachSchema(new SimpleSchema({
   },    
   "company.companyName": {
     type: String,
-    label: '公司名称'
+    label: '公司名称（必填）'
   },
   'company.alternativeName': {
     type: Array,
@@ -80,7 +80,7 @@ NameCheck.attachSchema(new SimpleSchema({
   },
   'company.moneyAmount': {
     type: Number,
-    label: '注册资本(万元)' 
+    label: '注册资本(单位：万元，必填)' 
   },
   'company.businessScope': {
     type: String,
@@ -116,10 +116,11 @@ NameCheck.attachSchema(new SimpleSchema({
     type: Array,
     minCount: 0,
     maxCount: 10,
-    label: "股东信息",
+    label: "股东信息（必填）",
   },
   "holders.$": {
     type: Object,
+    label: '添加股东'
   },
   "holders.$.holderName": {
     type: String,

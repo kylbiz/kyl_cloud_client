@@ -27,7 +27,7 @@ var companySchema = new SimpleSchema({
   },
   "company.companyZone": {
     type: String,
-    label: '注册区域',
+    label: '注册区域（必填）',
     optional: true,
     autoform: {
       type: 'select',
@@ -42,7 +42,7 @@ var companySchema = new SimpleSchema({
   },
   "company.companyName": {
     type: String,
-    label: '公司名称'
+    label: '公司名称（必填）'
   },
   "company.companyType": {
     type: String,
@@ -66,28 +66,13 @@ var companySchema = new SimpleSchema({
   },
   'company.companyTel': {
     type: String,
-    label: '联系电话',
+    label: '联系电话（必填）',
     autoform: {
       afFieldInput: {
         type: "number"
       }
     }    
   },
-  'company.companyZipcode': {
-    type: String,
-    label: '邮政编码',
-    optional: true,
-    autoform: {
-      type: 'select',
-      firstOption: false,
-      options: function() {
-        return [
-          {label: '虹口-200082', value: '200082'},
-          {label: '浦东-201204', value: '201204'}
-        ]
-      }
-    }
-  }, 
   'company.moneyAmount': {
     type: Number,
     label: '注册资本(万元)' 
@@ -146,7 +131,7 @@ var companySchema = new SimpleSchema({
 
   "legalPerson": {
     type: Object,
-    label: '法人',
+    label: '法人（必填）',
     optional: true
   },
   "legalPerson.legalPersonName": {
@@ -165,7 +150,7 @@ var companySchema = new SimpleSchema({
   },
   "legalPerson.legalPersonPhone": {
     type: String,
-    label: '移动电话',
+    label: '移动电话（必填）',
     autoform: {
       afFieldInput: {
         type: "number"
@@ -198,7 +183,7 @@ var companySchema = new SimpleSchema({
   },
   "legalPerson.legalPersonID": {
     type: String,
-    label: '身份证号码'
+    label: '身份证号码（必填）'
   },
   "chairman": {
     type: Object,
@@ -250,12 +235,12 @@ var companySchema = new SimpleSchema({
   },
   "supervisor": {
     type: Object,
-    label: '监事',
+    label: '监事（必填）',
     optional: true
   },
   "supervisor.supervisorName": {
     type: String,
-    label: '监事姓名'
+    label: '监事姓名（必填）'
   },
   "supervisor.supervisorType": {
     type: String,
@@ -281,7 +266,7 @@ var companySchema = new SimpleSchema({
   },
   "supervisor.supervisorID": {
     type: String,
-    label: '监事身份证号码'
+    label: '监事身份证号码（必填）'
   },
 
   "manager": {
@@ -331,7 +316,7 @@ var companySchema = new SimpleSchema({
     type: Array,
     minCount: 0,
     maxCount: 10,
-    label: "股东信息",
+    label: "股东信息(必填)",
     optional: true
   },
   "holders.$": {

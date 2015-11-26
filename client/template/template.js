@@ -66,10 +66,19 @@ Template.template.helpers({
     }).count();
     var allDocNum = Session.get("allDocNum") || 1;
 
-    return ((count * 100) / allDocNum)  + "%"
-
-
-
-
+    return ((count * 100) / allDocNum) + "%";
+  },
+  "progressclass": function() {
+    // progress-bar-striped active
+    var uuid = Session.get("uuid") || "";
+    var allDocNum = Session.get("allDocNum") || 1;
+    var count = HandleResults.find({
+      'uuid': uuid
+    }).count();
+    if (count < allDocNum) {
+      return 'progress-bar-striped active';
+    } else {
+      return '';
+    }
   }
 })

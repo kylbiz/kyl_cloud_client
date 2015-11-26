@@ -41,6 +41,11 @@ function fillObject(obj, properties) {
 }
 
 
+          // {label: '虹口-200082', value: '200082'},
+          // {label: '浦东-201204', value: '201204'}
+
+
+
 function handleRegistration(registration) {
   if(!registration.hasOwnProperty('company')) {
     var company = {};  
@@ -50,6 +55,20 @@ function handleRegistration(registration) {
   var companyArray = ['companyZone', 'companyName', 'companyType', 'companyId', 'companyTel', 'companyZipcode', 'moneyAmount', 'businessScope', 'businessPeriod']
   registration.company = fillObject(company, companyArray);
   registration.company.companyZone = registration.company.companyZone || "虹口";
+  // 邮编
+  registration.company.companyZipcode = '200082';
+  switch(registration.company.companyZone) {
+    case '虹口':
+      registration.company.companyZipcode = '200082';
+      break;
+    case '浦东':
+      registration.company.companyZipcode = '201204';
+      break;
+    default: 
+      registration.company.companyZipcode = '200082';
+      break;
+  }
+  // 注册资本
   registration.company.moneyAmount = registration.company.moneyAmount || 0 ;
   // addressFlag 是否需要提供地址
   if(!registration.hasOwnProperty('addressFlag')) {

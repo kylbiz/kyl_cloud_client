@@ -4,7 +4,7 @@
     <div class="panel-body">
       {{#if waittinggenerate}} 正在等待生成清单 {{/if}} {{#if isgenerating}} 订单正在生成 {{/if}} {{#if finishgenerate}} 生成完成 {{/if}}
       <div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}};">
+        <div class="progress-bar progress-bar-success {{progressclass}}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}};">
         生成进度： {{generatedNum}} / {{allDocNum}}
         </div>
       </div>
@@ -23,8 +23,6 @@
               <div class="list-group-item"><a href="{{pdfURI}}" download="{{cnLabel}}">下载pdf</a>
               </div>
               <div class="list-group-item"><a href="{{wordURI}}" download="{{cnLabel}}">下载word</a>
-              </div>
-              <div class="list-group-item"><a href="#">打印</a>
               </div>
             </div>
           </div>
