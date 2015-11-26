@@ -1,46 +1,34 @@
 <template name="template">
-<div class="panel panel-default">
-  <div class="panel-heading">生成清单</div>
-  <div class="panel-body">
-         <p>总模板： {{allDocNum}}</p>
-         <p>生成数： {{generatedNum}}</p>
-    {{#if waittinggenerate}}
-      正在等待生成
-    {{/if}}
-    {{#if isgenerating}}
-      订单正在生成 
-    {{/if}}
-        {{#if finishgenerate}}
-      生成完成
-    {{/if}}   
-<div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-    <span class="sr-only">60% Complete</span>
-  </div>
-</div>
-  </div>
-  <div class="panel-body">
-    <div class="col-sm-12">
-    {{#each handleResults}}
-    <div class="row o-group">
-      <div class="list-group-horizonal">
-        <div class="text-center">
-          <h4>{{cnLabel}}</h4>
-        </div>
-        <div class="box">
-          <div class="list-group-item"><a href="{{pdfURI}}" target="_blank">在线阅读</a>
-          </div>
-          <div class="list-group-item"><a href="{{pdfURI}}" download="{{cnLabel}}">下载pdf</a>
-          </div>
-          <div class="list-group-item"><a href="{{wordURI}}" download="{{cnLabel}}">下载word</a>
-          </div>
-          <div class="list-group-item"><a href="#">打印</a>          
+  <div class="panel panel-default">
+    <div class="panel-heading">生成清单</div>
+    <div class="panel-body">
+      {{#if waittinggenerate}} 正在等待生成清单 {{/if}} {{#if isgenerating}} 订单正在生成 {{/if}} {{#if finishgenerate}} 生成完成 {{/if}}
+      <div class="progress">
+        <div class="progress-bar progress-bar-success {{progressclass}}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}};">
+        生成进度： {{generatedNum}} / {{allDocNum}}
         </div>
       </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        {{#each handleResults}}
+        <div class="row o-group">
+          <div class="list-group-horizonal">
+            <div class="text-center">
+              <h4>{{cnLabel}}</h4>
+            </div>
+            <div class="box">
+              <div class="list-group-item"><a href="{{pdfURI}}" target="_blank">在线阅读</a>
+              </div>
+              <div class="list-group-item"><a href="{{pdfURI}}" download="{{cnLabel}}">下载pdf</a>
+              </div>
+              <div class="list-group-item"><a href="{{wordURI}}" download="{{cnLabel}}">下载word</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
       </div>
     </div>
-    {{/each}}
-    </div>
-  </div>
   </div>
 </template>

@@ -90,7 +90,7 @@ Template.signup.events({
 Template.layout.events({
   "click .signout": function(event) {
     Meteor.logout(function(err) {
-      if(err) {
+      if (err) {
         alert("退出登录失败！")
       } else {
         Router.go("/sign-in");
