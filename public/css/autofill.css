@@ -276,7 +276,7 @@ table.dataTable .btn {
   display: inline-block;
 }
 .main_table .btn-kyl {
-  width: 120px;
+  padding:  10px 40px
 }
 .btn-kyl {
     color: #fff;
