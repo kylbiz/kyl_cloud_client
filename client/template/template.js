@@ -18,17 +18,17 @@ Template.template.helpers({
     }).count();
     return count <= 0;
   },
-    "isgenerating": function() {
+  "isgenerating": function() {
     var uuid = Session.get("uuid") || "";
     var allDocNum = Session.get("allDocNum") || 1;
     var count = HandleResults.find({
       'uuid': uuid
     }).count();
     return (count > 0 && count < allDocNum);
-  }, 
+  },
   "finishgenerate": function() {
     var uuid = Session.get("uuid") || "";
-     var allDocNum = Session.get("allDocNum") || 1;
+    var allDocNum = Session.get("allDocNum") || 1;
     var count = HandleResults.find({
       'uuid': uuid
     }).count();
@@ -39,10 +39,14 @@ Template.template.helpers({
     var zone = Session.get("zone") || "zone";
     var holdernum = Session.get("holdernum") || 0;
 
-    var docNum = DocNum.findOne({type: type, zone: zone, holdernum: holdernum});
-    if(docNum) {
+    var docNum = DocNum.findOne({
+      type: type,
+      zone: zone,
+      holdernum: holdernum
+    });
+    if (docNum) {
       Session.set("allDocNum", docNum.num);
-      return docNum.num ;
+      return docNum.num;
     } else {
       Session.set("allDocNum", 8);
       return 8;
@@ -53,6 +57,19 @@ Template.template.helpers({
     var count = HandleResults.find({
       'uuid': uuid
     }).count();
-      return count || 0;
+    return count || 0;
+  },
+  "progress": function() {
+    var uuid = Session.get("uuid") || "";
+    var count = HandleResults.find({
+      'uuid': uuid
+    }).count();
+    var allDocNum = Session.get("allDocNum") || 1;
+
+    return ((count * 100) / allDocNum)  + "%"
+
+
+
+
   }
 })
