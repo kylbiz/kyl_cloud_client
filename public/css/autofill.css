@@ -160,6 +160,7 @@ h1, .h1 {
   .price_block:nth-child(odd):hover {
     border: 0 none;
   }
+
 }
 @media only screen and (min-width: 768px) {
   /* .price_block {border-right: 5px solid transparent; border-bottom: 0 none;} */
@@ -286,6 +287,19 @@ table.dataTable .btn {
    color: #fff; 
 }
 
+.copyright {
+ margin-top: 80px;
+ height: 48px;
+ line-height: 48px;
+ vertical-align: middle;
+ color: #555555;
+}
+
+.copyright img {
+ height: 48px;
+ width: auto;
+/* margin-right: 20px;  */
+}
 @media screen and (max-width: 800px) {
   header li{
     height: 48px;
@@ -299,7 +313,13 @@ table.dataTable .btn {
   
   .main_table .yiqicha img {
     margin-top: 32px;  
-  }    
+  }
+  .copyright {
+   margin-top: 48px;
+  }  
+  .pricing_table .footer {
+      padding: 10px;
+  }     
 }
 
 @media screen and (max-width: 640px) {
@@ -315,4 +335,17 @@ table.dataTable .btn {
   .main_table .yiqicha img {
     margin-top: 10px;  
   }  
+  .copyright {
+   margin-top: 30px;
+  }    
+  .pricing_table .footer {
+      padding: 8px;
+  }    
+  h3 {
+   font-size: 20px; 
+  }
+}
+
+.main_table {
+  padding-bottom: 10px; 
 }
