@@ -1,5 +1,5 @@
 var querystring = Meteor.npmRequire('querystring')
-var requestUrl = 'http://192.168.0.100/docgen/';
+var requestUrl = 'http://114.80.9.19:8801/docgen/';
 
 function log(info) {
   var len = arguments.length;
@@ -86,7 +86,6 @@ Meteor.methods({
       if(currentCheck) {
         var nameCheck = handleCheck(currentCheck);
         var companyZone = nameCheck.company.companyZone;
-        console.log('+++++++++', nameCheck, companyZone)
         var checkOptions = {
           check: nameCheck,
           uuid: options.uuid
@@ -297,29 +296,4 @@ function HandlePDCheck(checkOptions) {
     })
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

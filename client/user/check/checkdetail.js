@@ -5,6 +5,36 @@ Template.checkDetail.helpers({
     var docId = Session.get('docId') || "";
     var check =  NameCheck.findOne({docId: docId});
     return check;
+  },
+  holdernum: function() {
+    var docId = Session.get('docId') || "";
+    var check =  NameCheck.findOne({docId: docId});
+
+    if(check && check.hasOwnProperty("holders") && check.holders.length > 1) {
+     return 1;
+    } else {
+      return 0;
+    }
+  },
+  "templatezone": function() {
+    var docId = Session.get('docId') || "";
+    var check =  NameCheck.findOne({docId: docId});
+    var templatezone = "hk"; 
+    if(check && check.hasOwnProperty("company")) {
+      var zone = check.company.companyZone || "hk";
+      switch(zone) {
+        case '虹口': 
+          templatezone = "hk";
+          break;
+        case '浦东': 
+          templatezone = "pd";
+          break;
+        default: 
+          templatezone = "hk";
+          break;
+      }
+    } 
+    return templatezone;
   }
 });
 
@@ -12,6 +42,9 @@ Template.checkDetail.helpers({
 Template.checkDetail.events({
   "click .template": function(event) {
     var docId = Session.get('docId')  || "";
+    var type = "check";
+    var zone = $(event.currentTarget).attr("data-zone") || "hk";
+    var holdernum = $(event.currentTarget).attr("data-holdernum") || 0;
     var uuid = Meteor.uuid();
     if(docId && uuid) {
       var options = {
@@ -25,7 +58,7 @@ Template.checkDetail.events({
           console.log("generate template succeed");
         }
       })
-      Router.go("/template?uuid=" + uuid)
+      Router.go("/template?uuid=" + uuid + '&type=check&zone=' + zone + '&holdernum=' + holdernum);
     }
   }
 })

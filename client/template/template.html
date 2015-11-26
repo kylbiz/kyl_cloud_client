@@ -1,6 +1,20 @@
 <template name="template">
 <div class="panel panel-default">
-  <div class="panel-heading">OFFICE File</div>
+  <div class="panel-heading">生成清单</div>
+  <div>
+    <p>总模板： {{allDocNum}}</p>
+    <p>生成数： {{generatedNum}}</p>
+    {{#if waittinggenerate}}
+      正在等待生成
+    {{/if}}
+    {{#if isgenerating}}
+      订单正在生成 
+    {{/if}}
+        {{#if finishgenerate}}
+      生成完成
+    {{/if}}
+    
+  </div>
   <div class="panel-body">
     <div class="col-sm-12">
     {{#each handleResults}}
