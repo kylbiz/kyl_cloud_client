@@ -49,11 +49,24 @@ ul li {
 }
 
 header li{
-  height: 34px;
-  line-height: 34px;
+  height: 60px;
+  line-height: 60px;
   vertical-align: middle;
   display: inline-block;
+  font-size: 20px;
 }
+header li.uCenter {
+  margin-right: 20px; 
+}
+
+header .navbar-left {
+   float: left !important;
+}
+header .navbar-right {
+   text-align: right;
+   float: right !important;
+}
+
 
 h1, .h1 {
     font-size: 2.568rem;
@@ -65,7 +78,8 @@ h1, .h1 {
   line-height: 150%;
   margin: 0 auto;
   width: 100%;
-  padding-top: 10px;
+/*  padding-top: 10px;*/
+  padding: 0;
 }
 .pricing_table .footer {
   padding: 15px;
@@ -162,7 +176,7 @@ ul.pricing_table li {
  margin-bottom: 20px !important;
 }
 .o-menu-list {
- margin-top: 20px; 
+ margin-top: 10px;  
 }
 header.navigation {
   position: relative;
@@ -236,4 +250,69 @@ table.dataTable .btn {
 }
 .login-helpers {
   margin-top: 15px; 
+}
+
+.main_table .img-responsive {
+  margin: 0 auto;
+  text-align: center;
+  line-height: 0;
+}
+.main_table .icon-logo {
+  max-width: 68%;
+}
+.main_table .yiqicha {
+  max-width: 58%;
+}
+.main_table .yiqicha img {
+    margin-top: 80px;
+    border-top: solid 1px #ccc;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.img-responsive img {
+  max-width: 100% !important; 
+}
+.img-responsive a {
+  display: inline-block;
+}
+.main_table .btn-kyl {
+  width: 120px;
+}
+.btn-kyl {
+    color: #fff;
+    background-color: #ff7f56;
+}
+.btn-kyl:hover {
+   color: #fff; 
+}
+
+@media screen and (max-width: 800px) {
+  header li{
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+  }
+  
+  header li.uCenter {
+    margin-right: 15px; 
+  }
+  
+  .main_table .yiqicha img {
+    margin-top: 32px;  
+  }    
+}
+
+@media screen and (max-width: 640px) {
+  header li{
+    height: 24px;
+    line-height: 24px;
+    font-size: 18px;    
+  }
+  header li.uCenter {
+    margin-right: 10px; 
+  }  
+  
+  .main_table .yiqicha img {
+    margin-top: 10px;  
+  }  
 }

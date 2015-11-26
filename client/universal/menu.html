@@ -1,46 +1,27 @@
 <template name="menu">
-<style>
-html,body {
- height: 100%; 
-}
-#main-content {
- height: 100%; 
- padding: 0;
- position: absolute;
- top: 0;
- left: 0;
- width: 100%;
-}
-.container {
- height: 100%;   
-}
-.main_table {
- height: 100%;
- width: 100%;
-}
-</style>
- <table class="main_table">
-   <tbody>
-     <tr>
-       <td>
- <div class="center">
-  <h1 class="text-center">小白云公司注册模板系统</h1>
-  <div class="o-menu-list">
-  <ul class="pricing_table row">
-    <li class="price_block_static col-md-4 col-xs-11">
+
+ <div class="main_table">
+
+ <div class="center col-sm-12">
+  <div class="img-responsive icon-logo">
+    <img src="/img/icon-logo.jpg?v=2" alt="">
+  </div>
+  <div class="o-menu-list col-sm-12">
+  <ul class="pricing_table clearfix container">
+    <li class="price_block_static col-md-4 col-xs-12">
       <h3>公司备案信息</h3>
       <div class="footer">
         <a href="/registration" class="btn btn-default">填写</a>
       </div>
     </li>    
-    <li class="price_block_static active col-md-4 col-xs-11">
+    <li class="price_block_static active col-md-4 col-xs-12">
       <h3>公司核名信息<br>申请书表单      
       </h3>
       <div class="footer">
         <a href="/check" class="btn btn-default">填写</a>
       </div>
     </li>   
-    <li class="price_block_static col-md-4 col-xs-11">
+    <li class="price_block_static col-md-4 col-xs-12">
       <h3>个人中心</h3>
       <div class="footer">
         <a href="/user/registration" class="btn btn-danger">查看</a>
@@ -49,8 +30,12 @@ html,body {
   </ul>    
   </div>     
  </div>         
-       </td>
-     </tr>
-   </tbody>
- </table>
+
+ <div class="img-responsive yiqicha">
+     <img src="/img/yiqicha.jpg?v=1" alt="">   
+ </div>
+ <div class="text-center">
+    <a href="registration" class="btn btn-kyl">即刻体验</a>
+ </div>
+</div>
 </template>
