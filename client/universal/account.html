@@ -1,100 +1,96 @@
 <template name="signin">
-  <body class="login">
-    <section id="page">
-      <header>
-        <div class="container">
-          <div class="row">
-          </div>
-        </div>
-      </header>
-      <section id="login" class="visible">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-              <div class="login-box-plain">
-                <h2 class="bigintro">用户登录</h2>
-                <div class="divide-40"></div>
-                <div>
-                  <div class="form-group">
-                    <label for="userName">用户名</label>
-                    <i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control" id="userName">
-                  </div>
-                  <div class="form-group">
-                    <label for="userPassword">密码</label>
-                    <i class="fa fa-lock"></i>
-                    <input type="password" class="form-control" id="userPassword">
-                  </div>
-                <div class="alert alert-danger" id="loginError" role="alert" style="display:none"></div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-danger submit">登录</button>
-                    </div>
-                  </div>
-                  <div class="login-helpers">
-                    <a href="/sign-up">注册新用户</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-    </body>
-  </template>
 
-<template name="signup">
-    <body class="signup">
-    <section id="page">
-      <header>
-        <div class="container">
-          <div class="row">
-          </div>
-        </div>
-      </header>
-      <section id="login" class="visible">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-              <div class="login-box-plain">
-                <h2 class="bigintro">用户注册</h2>
-                <div class="divide-40"></div>
-                <div>
-                  <div class="form-group">
-                    <label for="userName">用户名</label>
-                    <i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control" id="userName">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">密码</label>
-                    <i class="fa fa-lock"></i>
-                    <input type="password" class="form-control" id="password">
-                  </div>
-                  <div class="form-group">
-                    <label for="password_re">再次输入密码</label>
-                    <i class="fa fa-lock"></i>
-                    <input type="password" class="form-control" id="password_re">
-                  </div>
-                  <div class="alert alert-success" id="signupSuccess" role="alert" style="display:none"></div>
-                <div class="alert alert-danger" id="signupError" role="alert" style="display:none"></div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-danger signup">注册</button>
+    <body class="login">
+        <section id="page">
+            <header>
+                <div class="container">
+                    <div class="row">
                     </div>
-                  </div>
+                </div>
+            </header>
+            <section id="login" class="visible">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="login-box-plain">
+                                <h2 class="bigintro">用户登录</h2>
+                                <div class="divide-40"></div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="userName">用户名</label>
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="text" class="form-control" id="userName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userPassword">密码</label>
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" id="userPassword">
+                                    </div>
+                                    <div class="alert alert-danger" id="loginError" role="alert" style="display:none"></div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger submit">登录</button>
+                                    </div>
+                                </div>
                                 <div class="login-helpers">
-                    <a href="/sign-in">已经有账号，登录系统</a>
-                  </div>
+                                    <a href="/sign-up">注册新用户</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            </section>
         </section>
-      </section>
     </body>
 </template>
+<template name="signup">
 
-<template name="signout">
-  
+    <body class="signup">
+        <section id="page">
+            <header>
+                <div class="container">
+                    <div class="row">
+                    </div>
+                </div>
+            </header>
+            <section id="login" class="visible">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="login-box-plain">
+                                <h2 class="bigintro">用户注册</h2>
+                                <div class="divide-40"></div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="userName">用户名</label>
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="text" class="form-control" id="userName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">密码</label>
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" id="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_re">再次输入密码</label>
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" id="password_re">
+                                    </div>
+                                    <div class="alert alert-success" id="signupSuccess" role="alert" style="display:none"></div>
+                                    <div class="alert alert-danger" id="signupError" role="alert" style="display:none"></div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger signup">注册</button>
+                                    </div>
+                                </div>
+                                <div class="login-helpers">
+                                    <a href="/sign-in">已经有账号，登录系统</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </body>
 </template>
-
-
-
+<template name="signout">
+</template>
