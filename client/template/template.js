@@ -1,5 +1,4 @@
-Meteor.subscribe("GetHandleResults");
-Meteor.subscribe("getDocNum");
+
 Template.template.helpers({
   "handleResults": function() {
     var uuid = Session.get("uuid") || "";

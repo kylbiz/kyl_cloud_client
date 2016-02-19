@@ -1,4 +1,3 @@
-Meteor.subscribe('checkInfo');
 
 Template.checkDetail.helpers({
   checkValue: function() {

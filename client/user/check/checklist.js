@@ -1,5 +1,3 @@
-Meteor.subscribe('checkInfo')
-
 var optionsObject = {
   columns: [
     {

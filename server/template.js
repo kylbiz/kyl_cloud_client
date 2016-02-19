@@ -1,5 +1,5 @@
 var querystring = Meteor.npmRequire('querystring')
-var requestUrl = 'http://114.80.9.19:8801/docgen/';
+var requestUrl = 'http://192.168.0.200/docgen/';
 
 function log(info) {
   var len = arguments.length;
@@ -249,7 +249,6 @@ function HandleHKTemplate(registrationOptions, callback) {
   var companyId = company.companyId;
   var companyTel = company.companyTel;
   var companyZipcode = company.companyZipcode;
-  var companyId = company.companyId;
   var moneyAmount = company.moneyAmount;
   var businessScope = company.businessScope;
   var businessPeriod = company.businessPeriod;
@@ -326,6 +325,7 @@ function HandleHKTemplate(registrationOptions, callback) {
   var investShare = [];
   var investMoneyAmount = [];
   var investDateOutput = [];
+
   holders.forEach(function(holder) {
     holderName.push(holder.holderName);
     holderIDType.push(holder.holderIDType);

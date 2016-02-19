@@ -1,7 +1,7 @@
 <template name="companyTemplate">
   <div class="row">
     <h1 align="center">备案信息录入</h1>
-    {{#autoForm collection="Company" id="CompanyInsert" type="insert" trimStrings=true}}
+    {{#autoForm collection="Company" id="CompanyInsert" type="insert" trimStrings=true doc=companyInsertValue}}
       {{> company}}                
     {{/autoForm}}
   </div>

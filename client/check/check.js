@@ -12,14 +12,16 @@ function randomNumber(number) {
 }
 
 AutoForm.hooks({
-  NameCheck: {
+  NameCheckInsert: {
     before: {
       insert: function(doc) {
+        LocalStore.set("check", doc);
+        
         if(Meteor.userId()) {
           var date = new Date();
           var docId = moment(date).format("YYYYMMDDHHmmssSSS") + randomNumber(4);
           doc.docId = docId;
-          doc.userId = Meteor.userId();         
+          doc.userId = Meteor.userId();   
           return doc;
         } else {
           return false;
@@ -28,8 +30,18 @@ AutoForm.hooks({
     },
     onSuccess: function(formType, result) {
       if(result) {
+        LocalStore.set("check", {});
         Router.go('/user/check');
       }
     }
+  }
+})
+
+
+
+Template.NameCheck.helpers({
+  "checkUpdateValue": function() {
+    var check =  LocalStore.get("check");
+    return check;
   }
 })

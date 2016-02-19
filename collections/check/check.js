@@ -4,7 +4,7 @@ NameCheck = new Mongo.Collection("NameCheck");
 DocNum = new Mongo.Collection("DocNum");
 Feedback = new Mongo.Collection("Feedback");
 
-NameCheck.attachSchema(new SimpleSchema({
+var NameCheckSchema = new SimpleSchema({
   userId: {
     type: String,
     label: '用户ID',
@@ -155,7 +155,10 @@ NameCheck.attachSchema(new SimpleSchema({
       return (new Date());
     }
   }
-}));
+})
+
+
+NameCheck.attachSchema(NameCheckSchema);
 
 NameCheck.helpers({
   "informationType": function() {

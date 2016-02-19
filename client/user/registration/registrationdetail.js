@@ -1,4 +1,4 @@
-Meteor.subscribe('getCompany');
+// Meteor.subscribe('getCompany');
 
 Template.CompanyDetail.helpers({
   companyValue: function() {

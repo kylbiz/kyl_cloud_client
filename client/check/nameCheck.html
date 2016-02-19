@@ -6,7 +6,7 @@
   <div class="NameCheck row">
 
     <h1 align="center">企业名称预先核准申请书</h1>
-    {{#autoForm collection="NameCheck" id="NameCheck" type="insert"}}
+    {{#autoForm collection="NameCheck" id="NameCheckInsert"  type="insert" doc=checkUpdateValue}}
       {{> afQuickField name='company' template="bootstrap3-inline" label-class="sr-only" afFieldInput-placeholder="schemaLabel"}}   
        
       {{> afQuickField name="addressFlag"}} 

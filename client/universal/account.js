@@ -52,7 +52,6 @@ Template.signup.events({
         }
       };
       Accounts.createUser(options, function(err) {
-        console.log(arguments)
         if (err) {
           $("[id=signupError]").html(" 注册失败，请再次注册!");
           $("[id=signupError]").show();
@@ -98,12 +97,5 @@ Template.layout.events({
     });
   }
 })
-
-
-
-
-
-
-
 
 //------------------------------------------------------------

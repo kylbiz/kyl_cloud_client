@@ -1,5 +1,5 @@
 var querystring = Meteor.npmRequire('querystring')
-var requestUrl = 'http://114.80.9.19:8801/docgen/';
+var requestUrl = 'http://192.168.0.200/docgen/';
 
 function log(info) {
   var len = arguments.length;

@@ -1,5 +1,3 @@
-Meteor.subscribe('getCompany')
-
 var optionsObject = {
   columns: [
     {
