@@ -32,7 +32,7 @@ Meteor.methods({
               });
               break;
             case '浦东':
-              HandlePDTemplate(registrationOptions, function(err, result) {
+              RegUtil.HandlePDTemplate(registrationOptions, function(err, result) {
                 callback(err, result);
               })
             break;

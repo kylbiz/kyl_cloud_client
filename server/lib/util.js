@@ -3,7 +3,7 @@
  * @return {string} 服务地址
  */
 kylServiceRequestUrl = function() {
-  return "http://192.168.1.116:8080/word/MyServlet";
+  return "http://120.55.166.196:8080/word/MyServlet";
 }
 
 // ------------------------------------------------
@@ -114,7 +114,7 @@ Util.getTemplateService = function(options) {
     || !options.hasOwnProperty("fileData")) {
     log("getTemplateService: options illegal.", options);
   } else {
-    log("getTemplateService: start get template service.");
+    log("getTemplateService: start generate document [" +cnLabel +"].");
     
     var logStr = ""; // 打印字符串变量
     var randomStr = options.randomStr;
@@ -134,8 +134,6 @@ Util.getTemplateService = function(options) {
     }
 
     var requestUrl = kylServiceRequestUrl();
-
-    log(queryParams)
 
     HTTP.call("POST",requestUrl, {
       params: queryParams
@@ -177,38 +175,6 @@ Util.getTemplateService = function(options) {
     })  
   }
 }
-
-
-// ------------------------------------------------
-/**
- * 判断参数是否为整数
- * @return {Boolean} 是整数返回true
- */
-
-Util.isInteger = function(value) {
-  return typeof value === "number" && isFinite(value) && Math.floor(value) === value;  
-}
-
-
-// ------------------------------------------------
-/**
- * 数值转换为指定位小数
- * @param  {Object} an object to handle
- * @param  {Array}  a lists of proprities that obj will have  
- * @return {Object} obj with all kinds of proprities
- */
-Util.handleProportion = function(numerator, denominator) {
-  var num = numerator * 100 / denominator;
-  if(Util.isInteger(num)){
-    return num + '%';
-  }else {
-    return num.toFixed(2) + '%';
-  }
-}
-
-// ------------------------------------------------
-
-
 
 
 // ------------------------------------------------

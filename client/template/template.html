@@ -2,7 +2,14 @@
   <div class="panel panel-default">
     <div class="panel-heading">生成清单</div>
     <div class="panel-body">
-      {{#if waittinggenerate}} 正在等待生成清单 {{/if}} {{#if isgenerating}} 订单正在生成 {{/if}} {{#if finishgenerate}} 生成完成 {{/if}}
+      {{#if waittinggenerate}} 
+        正在等待生成清单 
+      {{/if}} 
+      
+      {{#if isgenerating}}
+       订单正在生成 {{/if}} 
+      {{#if finishgenerate}} 生成完成 {{/if}}
+      
       <div class="progress">
         <div class="progress-bar progress-bar-success {{progressclass}}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}};">
         生成进度： {{generatedNum}} / {{allDocNum}}

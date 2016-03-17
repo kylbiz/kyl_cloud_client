@@ -5,32 +5,27 @@ Template.template.helpers({
     var handleResults = HandleResults.find({
       'uuid': uuid
     });
+    var count = handleResults.count();
+    Session.set("count", count);
     return handleResults;
   }
 });
 
 Template.template.helpers({
   "waittinggenerate": function() {
-    var uuid = Session.get("uuid") || "";
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count") || 0;
     return count <= 0;
   },
   "isgenerating": function() {
     var uuid = Session.get("uuid") || "";
     var allDocNum = Session.get("allDocNum") || 1;
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count") || 0;
     return (count > 0 && count < allDocNum);
   },
   "finishgenerate": function() {
     var uuid = Session.get("uuid") || "";
     var allDocNum = Session.get("allDocNum") || 1;
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count") || 0;
     return (count >= allDocNum);
   },
   "allDocNum": function() {
@@ -43,6 +38,7 @@ Template.template.helpers({
       zone: zone,
       holdernum: holdernum
     });
+
     if (docNum) {
       Session.set("allDocNum", docNum.num);
       return docNum.num;
@@ -53,16 +49,12 @@ Template.template.helpers({
   },
   "generatedNum": function() {
     var uuid = Session.get("uuid") || "";
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count");
     return count || 0;
   },
   "progress": function() {
     var uuid = Session.get("uuid") || "";
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count") || 0;
     var allDocNum = Session.get("allDocNum") || 1;
 
     return ((count * 100) / allDocNum) + "%";
@@ -71,9 +63,7 @@ Template.template.helpers({
     // progress-bar-striped active
     var uuid = Session.get("uuid") || "";
     var allDocNum = Session.get("allDocNum") || 1;
-    var count = HandleResults.find({
-      'uuid': uuid
-    }).count();
+    var count = Session.get("count") || 0;
     if (count < allDocNum) {
       return 'progress-bar-striped active';
     } else {
@@ -81,3 +71,22 @@ Template.template.helpers({
     }
   }
 })
+
+Template.template.onRendered(function() {
+  var self = this;
+  Tracker.autorun(function () {
+    var uuid = Session.get("uuid") || "";
+    var count = HandleResults.find({'uuid': uuid}).count();
+    console.log(count)
+    Session.set("count", count);
+  });
+})
+
+
+
+
+
+
+
+
+

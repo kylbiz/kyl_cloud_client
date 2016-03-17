@@ -146,12 +146,16 @@ RegUtil.handleRegistration = function(registration) {
 }
 
 // ------------------------------------------------
-RegUtil._hktemplateInit = function(registrationOptions) {
+/**
+ * 初始化登记信息
+ * @param  {json} registrationOptions 登记信息registration 对象
+ * @return {json}                     初始化后的registration对象
+ */
+RegUtil._templateInit = function(registrationOptions) {
   var _regObj = {};
 
   var registration = registrationOptions.registration;
   _regObj.uuid = registrationOptions.uuid;
-
 
   var company = registration.company;
 
@@ -230,107 +234,42 @@ RegUtil._hktemplateInit = function(registrationOptions) {
   _regObj.investDate = (year + 10) + '年' + month + '月' + day + '日';
   _regObj.mettingDate = year + '年' + month + '月' + day + '日';
 
+  _regObj.holders = registration.holders;
+
   return _regObj;
 }
 
-
 // ------------------------------------------------
+/**
+ * 初始化虹口备案请求列表
+ * @param  {object} _regObj 备案信息结构
+ * @return {object}         初始化后的备案结构信息
+ */
 
- RegUtil.HandleHKTemplate = function(registrationOptions, callback) {
-  log("HandleHKTemplate: Hi I am called.");
-  
-  var registration = registrationOptions.registration;
-  var uuid = registrationOptions.uuid;
-  var files = [
-    {id: 'K0211090101', name: '预先核名[单人]'},
-    {id: 'K0211090102', name: '预先核名[多人]'},
-    {id: 'K0211090201', name: '股东会决议[单人]'},
-    {id: 'K0211090202', name: '股东会决议[多人]'},  
-    {id: 'K0211090301', name: '公司章程[单人]'},
-    {id: 'K0211090302', name: '公司章程[多人]'},
-    {id: 'K0211090401', name: '房屋租赁合同'},
-    {id: 'K0211090501', name: '指定代表或共同代理人授权书'},
-    {id: 'K0211090601', name: '公司登记（备案）申请书'},
-    {id: 'K0211090701', name: '广告企业告知承诺书'},
-    {id: 'K0211090801', name: '小型微型企业认定申请表'},
-    {id: 'K0211090901', name: '上海市组织机构代码申请表'},
-    {id: 'K02110901001', name: '情况说明'}
-  ]
+// 虹口文档信息
+//  var files = [
+//   {id: 'K0211090101', name: '预先核名[单人]'},
+//   {id: 'K0211090102', name: '预先核名[多人]'},
+//   {id: 'K0211090201', name: '股东会决议[单人]'},
+//   {id: 'K0211090202', name: '股东会决议[多人]'},  
+//   {id: 'K0211090301', name: '公司章程[单人]'},
+//   {id: 'K0211090302', name: '公司章程[多人]'},
+//   {id: 'K0211090401', name: '房屋租赁合同'},
+//   {id: 'K0211090501', name: '指定代表或共同代理人授权书'},
+//   {id: 'K0211090601', name: '公司登记（备案）申请书'},
+//   {id: 'K0211090701', name: '广告企业告知承诺书'},
+//   {id: 'K0211090801', name: '小型微型企业认定申请表'},
+//   {id: 'K0211090901', name: '上海市组织机构代码申请表'},
+//   {id: 'K02110901001', name: '情况说明'}
+// ]
 
-  var company = registration.company;
-  var companyZone = company.companyZone;
-  var companyName = company.companyName;
-  var companyType = company.companyType;
-  var companyId = company.companyId;
-  var companyTel = company.companyTel;
-  var companyZipcode = company.companyZipcode;
-  var moneyAmount = company.moneyAmount;
-  var businessScope = company.businessScope;
-  var businessPeriod = company.businessPeriod;
-
-  var addressFlag = registration.addressFlag;
-  var companyAddress = registration.companyAddress;
-  var productionAddress = registration.productionAddress;
-
-  var legalPerson = registration.legalPerson;
-  var legalPersonName = legalPerson.legalPersonName;
-  var legalPersonTel = legalPerson.legalPersonTel;
-  var legalPersonPhone = legalPerson.legalPersonPhone;
-  var legalPersonEmail = legalPerson.legalPersonEmail;
-  var legalPersonIDType = legalPerson.legalPersonIDType;
-  var legalPersonID = legalPerson.legalPersonID;
-
-  var chairman = registration.chairman;
-  var chairmanName = chairman.chairmanName;
-  var chairmanType = chairman.chairmanType;
-  var chairmanIDType = chairman.chairmanIDType;
-  var chairmanID = chairman.chairmanID;
-  var chairmanPhone = chairman.chairmanPhone;
-
-  var supervisor = registration.supervisor;
-  var supervisorName = supervisor.supervisorName;
-  var supervisorType = supervisor.supervisorType;
-  var supervisorIDType = supervisor.supervisorIDType;
-  var supervisorID = supervisor.supervisorID;
-
-  var manager = registration.manager;
-  var managerName = manager.managerName;
-  var managerType = manager.managerType;
-  var managerIDType = manager.managerIDType;
-  var managerID = manager.managerID;
-
-
-  var contractor = registration.contractor;
-  var contractorName = contractor.contractorName;
-  var contractorTel = contractor.contractorTel;
-  var contractorPhone = contractor.contractorPhone;
-  var contractorEmail = contractor.contractorEmail;
-  var contractorIDType = contractor.contractorIDType;
-  var contractorID = contractor.contractorID;
-
-  var financialStaff = registration.financialStaff;
-  var financialStaffName = financialStaff.financialStaffName;
-  var financialStallTel = financialStaff.financialStallTel;
-  var financialStaffPhone = financialStaff.financialStaffPhone;
-  var financialStaffEmail = financialStaff.financialStaffEmail;
-  var financialStaffIDType = financialStaff.financialStaffIDType;
-  var financialStaffID = financialStaff.financialStaffID;
-
-  var authorizationFlag = registration.authorizationFlag;
-  var createTime = registration.createTime;
-  var year = createTime.getFullYear();
-  var month = createTime.getMonth() + 1;
-  var day = '28';
-  var investDate = (year + 10) + '年' + month + '月' + day + '日';
-  var mettingDate = year + '年' + month + '月' + day + '日';
-
-
-  
+RegUtil._hkRegLits = function(_regObj) {
+  log("_hkRegLits: Hi I am called.");
   var regulationFileName = '';
   var holderFileName = '';
   var registrationFileName = '';
 
-  var holders = registration.holders;
+  var holders = _regObj.holders;
   var holderLength = holders.length;
 
   var holderName = [];
@@ -348,12 +287,12 @@ RegUtil._hktemplateInit = function(registrationOptions) {
     investType.push(holder.investType);
     investShare.push(holder.investShare + "%");
     investMoneyAmount.push(holder.investMoneyAmount);
-    investDateOutput.push(investDate);
+    investDateOutput.push(_regObj.investDate);
   })
 
   
   if(holderLength <= 1) {
-    console.log("单人")
+    log("单人")
     regulationFileName = 'K0211090301';
     holderFileName = 'K0211090201';
     registrationFileName = 'K0211090601';
@@ -361,11 +300,11 @@ RegUtil._hktemplateInit = function(registrationOptions) {
     var regulations = {
       fileName: regulationFileName,
       cnLabel : '公司章程',
-      companyName: companyName,
-      companyAddress: companyAddress,
-      productionAddress: productionAddress,
-      businessScope: businessScope,
-      moneyAmount: moneyAmount,
+      companyName: _regObj.companyName,
+      companyAddress: _regObj.companyAddress,
+      productionAddress: _regObj.productionAddress,
+      businessScope: _regObj.businessScope,
+      moneyAmount: _regObj.moneyAmount,
       holderName: holderName[0],
       investDate: investDateOutput[0],
       investType: investType[0],
@@ -374,18 +313,18 @@ RegUtil._hktemplateInit = function(registrationOptions) {
     }
 
   } else {
-    console.log('多人')
+    log('多人')
     regulationFileName = 'K0211090302';
     holderFileName = 'K0211090202';
     registrationFileName = 'K0211090602'; 
     var regulations = {
       fileName: regulationFileName,
       cnLabel : '公司章程',
-      companyName: companyName,
-      companyAddress: companyAddress,
-      productionAddress: productionAddress,
-      businessScope: businessScope,
-      moneyAmount: moneyAmount,
+      companyName: _regObj.companyName,
+      companyAddress: _regObj.companyAddress,
+      productionAddress: _regObj.productionAddress,
+      businessScope: _regObj.businessScope,
+      moneyAmount: _regObj.moneyAmount,
       holderName: holderName,
       investDate: investDateOutput,
       investType: investType,
@@ -393,18 +332,19 @@ RegUtil._hktemplateInit = function(registrationOptions) {
       registeredCapital: investMoneyAmount
     }
   }  
+
   var requests = [];
   requests.push(regulations);
 
   var shareholder = {
     fileName : holderFileName,
     cnLabel : '股东会决议',
-    mettingDate: mettingDate,
-    companyName : companyName,
-    chairmanName: chairmanName,
-    managerName: managerName,
-    supervisorName:supervisorName,
-    supervisorID: supervisorID
+    mettingDate: _regObj.mettingDate,
+    companyName : _regObj.companyName,
+    chairmanName: _regObj.chairmanName,
+    managerName: _regObj.managerName,
+    supervisorName: _regObj.supervisorName,
+    supervisorID: _regObj.supervisorID
   }
   requests.push(shareholder)
 
@@ -412,51 +352,49 @@ RegUtil._hktemplateInit = function(registrationOptions) {
   var leasing = {
     fileName: 'K0211090401',
     cnLabel: '房屋租赁合同',
-    companyName: companyName,
-    companyAddress: companyAddress     
+    companyName: _regObj.companyName,
+    companyAddress: _regObj.companyAddress     
   }
   requests.push(leasing);
 
-
   // 公司备案申请书
-
   var registrationBook = {
     fileName: registrationFileName,
     cnLabel : '公司登记（备案）申请书',    
-    companyName: companyName,
-    companyZone: companyZone,
-    companyType: companyType,
-    companyId: companyId,
-    companyTel: companyTel,
-    companyZipcode: companyZipcode,
-    businessScope: businessScope,
-    businessPeriod: businessPeriod,
+    companyName: _regObj.companyName,
+    companyZone: _regObj.companyZone,
+    companyType: _regObj.companyType,
+    companyId: _regObj.companyId,
+    companyTel: _regObj.companyTel,
+    companyZipcode: _regObj.companyZipcode,
+    businessScope: _regObj.businessScope,
+    businessPeriod: _regObj.businessPeriod,
 
-    companyAddress: companyAddress,
-    productionAddress: productionAddress,
+    companyAddress: _regObj.companyAddress,
+    productionAddress: _regObj.productionAddress,
 
-    legalPersonName: legalPersonName,
-    legalPersonTel: legalPersonTel,
-    legalPersonPhone: legalPersonPhone,
-    legalPersonEmail: legalPersonEmail,
-    legalPersonIDType: legalPersonIDType,
-    legalPersonID: legalPersonID,
+    legalPersonName: _regObj.legalPersonName,
+    legalPersonTel: _regObj.legalPersonTel,
+    legalPersonPhone: _regObj.legalPersonPhone,
+    legalPersonEmail: _regObj.legalPersonEmail,
+    legalPersonIDType: _regObj.legalPersonIDType,
+    legalPersonID: _regObj.legalPersonID,
 
-    chairmanName: chairmanName,
-    chairmanType: chairmanType,
-    chairmanIDType: chairmanIDType,
-    chairmanID: chairmanID,
-    chairmanPhone: chairmanPhone,
+    chairmanName: _regObj.chairmanName,
+    chairmanType: _regObj.chairmanType,
+    chairmanIDType: _regObj.chairmanIDType,
+    chairmanID: _regObj.chairmanID,
+    chairmanPhone: _regObj.chairmanPhone,
 
-    supervisorName: supervisorName,
-    supervisorType: supervisorType,
-    supervisorIDType: supervisorIDType,
-    supervisorID: supervisorID,
+    supervisorName: _regObj.supervisorName,
+    supervisorType: _regObj.supervisorType,
+    supervisorIDType: _regObj.supervisorIDType,
+    supervisorID: _regObj.supervisorID,
 
-    managerName: managerName,
-    managerType: managerType,
-    managerIDType: managerIDType,
-    managerID: managerID,
+    managerName: _regObj.managerName,
+    managerType: _regObj.managerType,
+    managerIDType: _regObj.managerIDType,
+    managerID: _regObj.managerID,
 
     holderName: holderName,
     holderIDType: holderIDType,
@@ -465,21 +403,21 @@ RegUtil._hktemplateInit = function(registrationOptions) {
     investDate: investDateOutput,
     money: investMoneyAmount,
     share: investShare,
-    moneyAmount: moneyAmount,
+    moneyAmount: _regObj.moneyAmount,
 
-    contractorName: contractorName,
-    contractorTel: contractorTel,
-    contractorPhone: contractorPhone,
-    contractorEmail: contractorEmail,
-    contractorIDType: contractorIDType,
-    contractorID: contractorID,
+    contractorName: _regObj.contractorName,
+    contractorTel: _regObj.contractorTel,
+    contractorPhone: _regObj.contractorPhone,
+    contractorEmail: _regObj.contractorEmail,
+    contractorIDType: _regObj.contractorIDType,
+    contractorID: _regObj.contractorID,
 
-    financialStaffName: financialStaffName,
-    financialStallTel: financialStallTel,
-    financialStaffPhone: financialStaffPhone,
-    financialStaffEmail: financialStaffEmail,
-    financialStaffIDType: financialStaffIDType,
-    financialStaffID: financialStaffID
+    financialStaffName: _regObj.financialStaffName,
+    financialStallTel: _regObj.financialStallTel,
+    financialStaffPhone: _regObj.financialStaffPhone,
+    financialStaffEmail: _regObj.financialStaffEmail,
+    financialStaffIDType: _regObj.financialStaffIDType,
+    financialStaffID: _regObj.financialStaffID
   }
 
   requests.push(registrationBook);
@@ -510,120 +448,44 @@ RegUtil._hktemplateInit = function(registrationOptions) {
 
   requests.push(note);
 
-  requests.forEach(function(request) {
-    var fileName = request.fileName;
-    var cnLabel = request.cnLabel;
-    var randomStr = uuid;
-    delete request.fileName;
-    delete request.cnLabel;
-
-    var paramsObj = {
-      fileName: fileName,
-      cnLabel: cnLabel,
-      randomStr: randomStr,
-      fileData: request
-    };
-
-   Util.getTemplateService(paramsObj);
-  })
+  return requests;
 }
+
+
+
+
 
 // ------------------------------------------------
 
-RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
-  var registration = registrationOptions.registration;
-  var uuid = registrationOptions.uuid;
-  var files = [
-    {id: 'K0211020101', name: '预先核名[单人]'},
-    {id: 'K0211020102', name: '预先核名[多人]'},
-    {id: 'K0211020201', name: '股东会决议[单人]'},
-    {id: 'K0211020202', name: '股东会决议[多人]'},  
-    {id: 'K0211020301', name: '公司章程[单人]'},
-    {id: 'K0211020302', name: '公司章程[多人]'},
-    {id: 'K0211020401', name: '房屋租赁合同'},
-    {id: 'K0211020501', name: '指定代表或共同代理人授权书'},
-    {id: 'K0211020601', name: '公司登记（备案）申请书'},
-    {id: 'K0211020701', name: '广告企业告知承诺书'},
-    {id: 'K0211020801', name: '小型微型企业认定申请表'},
-    {id: 'K0211020901', name: '上海市组织机构代码申请表'},
-    {id: 'K02110201001', name: '情况说明'}
-  ]
+/**
+ * 初始化浦东备案请求列表
+ * @param  {object} _regObj 备案信息结构
+ * @return {object}         初始化后的备案结构信息
+ */
 
-  var company = registration.company;
-  var companyZone = company.companyZone;
-  var companyName = company.companyName;
-  var companyType = company.companyType;
-  var companyId = company.companyId;
-  var companyTel = company.companyTel;
-  var companyZipcode = company.companyZipcode;
-  var companyId = company.companyId;
-  var moneyAmount = company.moneyAmount;
-  var businessScope = company.businessScope;
-  var businessPeriod = company.businessPeriod;
+// var files = [
+//   {id: 'K0211020101', name: '预先核名[单人]'},
+//   {id: 'K0211020102', name: '预先核名[多人]'},
+//   {id: 'K0211020201', name: '股东会决议[单人]'},
+//   {id: 'K0211020202', name: '股东会决议[多人]'},  
+//   {id: 'K0211020301', name: '公司章程[单人]'},
+//   {id: 'K0211020302', name: '公司章程[多人]'},
+//   {id: 'K0211020401', name: '房屋租赁合同'},
+//   {id: 'K0211020501', name: '指定代表或共同代理人授权书'},
+//   {id: 'K0211020601', name: '公司登记（备案）申请书'},
+//   {id: 'K0211020701', name: '广告企业告知承诺书'},
+//   {id: 'K0211020801', name: '小型微型企业认定申请表'},
+//   {id: 'K0211020901', name: '上海市组织机构代码申请表'},
+//   {id: 'K02110201001', name: '情况说明'}
+// ]
 
-  var addressFlag = registration.addressFlag;
-  var companyAddress = registration.companyAddress;
-  var productionAddress = registration.productionAddress;
-
-  var legalPerson = registration.legalPerson;
-  var legalPersonName = legalPerson.legalPersonName;
-  var legalPersonTel = legalPerson.legalPersonTel;
-  var legalPersonPhone = legalPerson.legalPersonPhone;
-  var legalPersonEmail = legalPerson.legalPersonEmail;
-  var legalPersonIDType = legalPerson.legalPersonIDType;
-  var legalPersonID = legalPerson.legalPersonID;
-
-  var chairman = registration.chairman;
-  var chairmanName = chairman.chairmanName;
-  var chairmanType = chairman.chairmanType;
-  var chairmanIDType = chairman.chairmanIDType;
-  var chairmanID = chairman.chairmanID;
-  var chairmanPhone = chairman.chairmanPhone;
-
-  var supervisor = registration.supervisor;
-  var supervisorName = supervisor.supervisorName;
-  var supervisorType = supervisor.supervisorType;
-  var supervisorIDType = supervisor.supervisorIDType;
-  var supervisorID = supervisor.supervisorID;
-
-  var manager = registration.manager;
-  var managerName = manager.managerName;
-  var managerType = manager.managerType;
-  var managerIDType = manager.managerIDType;
-  var managerID = manager.managerID;
-
-
-  var contractor = registration.contractor;
-  var contractorName = contractor.contractorName;
-  var contractorTel = contractor.contractorTel;
-  var contractorPhone = contractor.contractorPhone;
-  var contractorEmail = contractor.contractorEmail;
-  var contractorIDType = contractor.contractorIDType;
-  var contractorID = contractor.contractorID;
-
-  var financialStaff = registration.financialStaff;
-  var financialStaffName = financialStaff.financialStaffName;
-  var financialStallTel = financialStaff.financialStallTel;
-  var financialStaffPhone = financialStaff.financialStaffPhone;
-  var financialStaffEmail = financialStaff.financialStaffEmail;
-  var financialStaffIDType = financialStaff.financialStaffIDType;
-  var financialStaffID = financialStaff.financialStaffID;
-
-  var authorizationFlag = registration.authorizationFlag;
-  var createTime = registration.createTime;
-  var year = createTime.getFullYear();
-  var month = createTime.getMonth() + 1;
-  var day = '28';
-  var investDate = (year + 10) + '年' + month + '月' + day + '日';
-  var mettingDate = year + '年' + month + '月' + day + '日';
-
-
-  
+RegUtil._pdRegLits = function(_regObj) {
+  log("_pdRegLits: Hi I am called.");
   var regulationFileName = '';
   var holderFileName = '';
   var registrationFileName = '';
 
-  var holders = registration.holders;
+  var holders = _regObj.holders;
   var holderLength = holders.length;
 
   var holderName = [];
@@ -640,7 +502,7 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
     investType.push(holder.investType);
     investShare.push(holder.investShare + "%");
     investMoneyAmount.push(holder.investMoneyAmount);
-    investDateOutput.push(investDate);
+    investDateOutput.push(_regObj.investDate);
   })
 
   
@@ -653,11 +515,11 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
     var regulations = {
       fileName: regulationFileName,
       cnLabel : '公司章程',
-      companyName: companyName,
-      companyAddress: companyAddress,
-      productionAddress: productionAddress,
-      businessScope: businessScope,
-      moneyAmount: moneyAmount,
+      companyName: _regObj.companyName,
+      companyAddress: _regObj.companyAddress,
+      productionAddress: _regObj.productionAddress,
+      businessScope: _regObj.businessScope,
+      moneyAmount: _regObj.moneyAmount,
       holderName: holderName[0],
       investDate: investDateOutput[0],
       investType: investType[0],
@@ -673,11 +535,11 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
     var regulations = {
       fileName: regulationFileName,
       cnLabel : '公司章程',
-      companyName: companyName,
-      companyAddress: companyAddress,
-      productionAddress: productionAddress,
-      businessScope: businessScope,
-      moneyAmount: moneyAmount,
+      companyName: _regObj.companyName,
+      companyAddress: _regObj.companyAddress,
+      productionAddress: _regObj.productionAddress,
+      businessScope: _regObj.businessScope,
+      moneyAmount: _regObj.moneyAmount,
       holderName: holderName,
       holderNames: holderName.join('、'),
       share: investShare,
@@ -693,13 +555,13 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
   var shareholder = {
     fileName : holderFileName,
     cnLabel : '股东会决议',
-    mettingDate: mettingDate,
-    companyName : companyName,
-    chairmanName: chairmanName,
-    supervisorName:supervisorName,
-    managerName: managerName,
+    mettingDate: _regObj.mettingDate,
+    companyName : _regObj.companyName,
+    chairmanName: _regObj.chairmanName,
+    supervisorName: _regObj.supervisorName,
+    managerName: _regObj.managerName,
     holderNumber: holderLength,
-    supervisorID: supervisorID
+    supervisorID: _regObj.supervisorID
   }
   requests.push(shareholder)
 
@@ -707,50 +569,48 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
   var leasing = {
     fileName: 'K0211020401',
     cnLabel: '房屋租赁合同',
-    companyName: companyName,
-    companyAddress: companyAddress     
+    companyName: _regObj.companyName,
+    companyAddress: _regObj.companyAddress     
   }
   requests.push(leasing);
 
-
   // 公司备案申请书
-
   var registrationBook = {
     fileName: registrationFileName,
     cnLabel : '公司登记（备案）申请书',    
-    companyName: companyName,
-    companyZone: companyZone,
-    companyType: companyType,
-    companyId: companyId,
-    companyTel: companyTel,
-    companyZipcode: companyZipcode,
-    businessScope: businessScope,
-    businessPeriod: businessPeriod,
+    companyName: _regObj.companyName,
+    companyZone: _regObj.companyZone,
+    companyType: _regObj.companyType,
+    companyId: _regObj.companyId,
+    companyTel: _regObj.companyTel,
+    companyZipcode: _regObj.companyZipcode,
+    businessScope: _regObj.businessScope,
+    businessPeriod: _regObj.businessPeriod,
 
-    companyAddress: companyAddress,
-    productionAddress: productionAddress,
+    companyAddress: _regObj.companyAddress,
+    productionAddress: _regObj.productionAddress,
 
-    legalPersonName: legalPersonName,
-    legalPersonTel: legalPersonTel,
-    legalPersonPhone: legalPersonPhone,
-    legalPersonEmail: legalPersonEmail,
-    legalPersonIDType: legalPersonIDType,
-    legalPersonID: legalPersonID,
+    legalPersonName: _regObj.legalPersonName,
+    legalPersonTel: _regObj.legalPersonTel,
+    legalPersonPhone: _regObj.legalPersonPhone,
+    legalPersonEmail: _regObj.legalPersonEmail,
+    legalPersonIDType: _regObj.legalPersonIDType,
+    legalPersonID: _regObj.legalPersonID,
 
-    chairmanName: chairmanName,
-    chairmanType: chairmanType,
-    chairmanIDType: chairmanIDType,
-    chairmanID: chairmanID,
+    chairmanName: _regObj.chairmanName,
+    chairmanType: _regObj.chairmanType,
+    chairmanIDType: _regObj.chairmanIDType,
+    chairmanID: _regObj.chairmanID,
 
-    supervisorName: supervisorName,
-    supervisorType: supervisorType,
-    supervisorIDType: supervisorIDType,
-    supervisorID: supervisorID,
+    supervisorName: _regObj.supervisorName,
+    supervisorType: _regObj.supervisorType,
+    supervisorIDType: _regObj.supervisorIDType,
+    supervisorID: _regObj.supervisorID,
 
-    managerName: managerName,
-    managerType: managerType,
-    managerIDType: managerIDType,
-    managerID: managerID,
+    managerName: _regObj.managerName,
+    managerType: _regObj.managerType,
+    managerIDType: _regObj.managerIDType,
+    managerID: _regObj.managerID,
 
     holderName: holderName,
     holderIDType: holderIDType,
@@ -759,21 +619,21 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
     investDate: investDateOutput,
     money: investMoneyAmount,
     share: investShare,
-    moneyAmount: moneyAmount,
+    moneyAmount: _regObj.moneyAmount,
 
-    contractorName: contractorName,
-    contractorTel: contractorTel,
-    contractorPhone: contractorPhone,
-    contractorEmail: contractorEmail,
-    contractorIDType: contractorIDType,
-    contractorID: contractorID,
+    contractorName: _regObj.contractorName,
+    contractorTel: _regObj.contractorTel,
+    contractorPhone: _regObj.contractorPhone,
+    contractorEmail: _regObj.contractorEmail,
+    contractorIDType: _regObj.contractorIDType,
+    contractorID: _regObj.contractorID,
 
-    financialStaffName: financialStaffName,
-    financialStallTel: financialStallTel,
-    financialStaffPhone: financialStaffPhone,
-    financialStaffEmail: financialStaffEmail,
-    financialStaffIDType: financialStaffIDType,
-    financialStaffID: financialStaffID
+    financialStaffName: _regObj.financialStaffName,
+    financialStallTel: _regObj.financialStallTel,
+    financialStaffPhone: _regObj.financialStaffPhone,
+    financialStaffEmail: _regObj.financialStaffEmail,
+    financialStaffIDType: _regObj.financialStaffIDType,
+    financialStaffID: _regObj.financialStaffID
   }
 
   requests.push(registrationBook);
@@ -802,19 +662,65 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
   var cogeneration = {
     fileName: 'K0211021001',
     cnLabel : '联动登记申请单',
-    companyName: companyName,
-    companyAddress: companyAddress,
-    legalPersonName: legalPersonName,
-    legalPersonPhone: legalPersonPhone,
-    companyType: companyType,
-    zipcode: companyZipcode    
+    companyName: _regObj.companyName,
+    companyAddress: _regObj.companyAddress,
+    legalPersonName: _regObj.legalPersonName,
+    legalPersonPhone: _regObj.legalPersonPhone,
+    companyType: _regObj.companyType,
+    zipcode: _regObj.companyZipcode    
   }
   requests.push(cogeneration);
+
+  return requests;
+}
+
+// ------------------------------------------------
+/**
+ * 虹口备案申请书生成服务
+ * @param {object}   registrationOptions 备案申请结构体参数
+ */
+ RegUtil.HandleHKTemplate = function(registrationOptions) {
+  log("HandleHKTemplate: Hi I am called.");
+  
+  var _regObj = RegUtil._templateInit(registrationOptions);
+  
+  var requests = RegUtil._hkRegLits(_regObj);
 
   requests.forEach(function(request) {
     var fileName = request.fileName;
     var cnLabel = request.cnLabel;
-    var randomStr = uuid;
+    var randomStr = _regObj.uuid;
+    delete request.fileName;
+    delete request.cnLabel;
+
+    var paramsObj = {
+      fileName: fileName,
+      cnLabel: cnLabel,
+      randomStr: randomStr,
+      fileData: request
+    };
+
+   Util.getTemplateService(paramsObj);
+  })
+}
+
+// ------------------------------------------------
+/**
+ * 浦东备案申请书生成服务
+ * @param {object}   registrationOptions 备案申请结构体参数
+ */
+
+RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
+  log("HandlePDTemplate: Hi I am called.");
+
+  _regObj = RegUtil._templateInit(registrationOptions);
+
+  var requests = RegUtil._pdRegLits(_regObj);
+
+  requests.forEach(function(request) {
+    var fileName = request.fileName;
+    var cnLabel = request.cnLabel;
+    var randomStr = _regObj.uuid;
     delete request.fileName;
     delete request.cnLabel;
 
@@ -828,6 +734,5 @@ RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
     Util.getTemplateService(paramsObj);
   })
 }
-
 
 // ------------------------------------------------
