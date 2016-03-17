@@ -11,7 +11,6 @@ NameCheck.allow({
   }
 });
 
-
 Company.allow({
   insert: function(userId, doc) {
     if (userId) {

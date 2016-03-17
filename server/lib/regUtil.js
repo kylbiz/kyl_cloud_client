@@ -1,60 +1,28 @@
-var querystring = Meteor.npmRequire('querystring')
-var requestUrl = 'http://192.168.0.200/docgen/';
-
-function log(info) {
-  var len = arguments.length;
-  console.log('------------------------------------')
-  for(var i = 0; i < len; i++) {
-    console.log(arguments[i]);
-  }
-};
-
-function isInteger(value) {
-  return typeof value === "number" && isFinite(value) && Math.floor(value) === value;  
-}
-
-
-function handleProportion(numerator, denominator) {
-  var num = numerator * 100 / denominator;
-  if(isInteger(num)){
-    return num + '%';
-  }else {
-    return num.toFixed(2) + '%';
-  }
-}
-
 /**
- * @param  {Object} an object to handle
- * @param  {Array}  a lists of proprities that obj will have  
- * @return {Object} obj with all kinds of proprities
+ * RegUtil: 企业登记Util
  */
-function fillObject(obj, properties) {
-  currentObj = {};
-  properties.forEach(function(propertity) {
-    if(!obj.hasOwnProperty(propertity)) {
-      currentObj[propertity] = " ";
-    } else {
-      currentObj[propertity] = obj[propertity];
-    } 
-  });
-  return currentObj;
-}
 
+RegUtil = {};
 
-          // {label: '虹口-200082', value: '200082'},
-          // {label: '浦东-201204', value: '201204'}
+// ------------------------------------------------
+/**
+ * 登记信息初始化
+ * @param {json} registration 数据库中的registration结构
+ * @return {json} 返回初始化registration
+ * {label: '虹口-200082', value: '200082'}
+ * {label: '浦东-201204', value: '201204'}
+ */
 
-
-
-function handleRegistration(registration) {
+RegUtil.handleRegistration = function(registration) {
   if(!registration.hasOwnProperty('company')) {
     var company = {};  
   } else {
     var company = registration.company;
   }
   var companyArray = ['companyZone', 'companyName', 'companyType', 'companyId', 'companyTel', 'companyZipcode', 'moneyAmount', 'businessScope', 'businessPeriod']
-  registration.company = fillObject(company, companyArray);
+  registration.company = Util.fillObject(company, companyArray);
   registration.company.companyZone = registration.company.companyZone || "虹口";
+
   // 邮编
   registration.company.companyZipcode = '200082';
   switch(registration.company.companyZone) {
@@ -68,16 +36,20 @@ function handleRegistration(registration) {
       registration.company.companyZipcode = '200082';
       break;
   }
+
   // 注册资本
   registration.company.moneyAmount = registration.company.moneyAmount || 0 ;
+
   // addressFlag 是否需要提供地址
   if(!registration.hasOwnProperty('addressFlag')) {
      registration.addressFlag = '是';
   }
+
   // companyAddress 公司地址
   if(!registration.hasOwnProperty('companyAddress')) {
     registration.companyAddress = ' ';
   }
+
   // productionAddress 生产地址
   if(!registration.hasOwnProperty('productionAddress')) {
     registration.productionAddress = ' ';
@@ -90,7 +62,7 @@ function handleRegistration(registration) {
   };
 
   var legalPersonArray = ['legalPersonName', 'legalPersonTel', 'legalPersonPhone', 'legalPersonEmail', 'legalPersonIDType', 'legalPersonID'];
-  registration.legalPerson = fillObject(legalPerson, legalPersonArray);
+  registration.legalPerson = Util.fillObject(legalPerson, legalPersonArray);
 
   // chairman 董事
   if(registration.hasOwnProperty('chairman')) {
@@ -99,7 +71,7 @@ function handleRegistration(registration) {
     var chairman = {};
   };        
   var chairmanArray = ['chairmanName', 'chairmanType', 'chairmanIDType', 'chairmanID', "chairmanPhone"];
-  registration.chairman = fillObject(chairman, chairmanArray);
+  registration.chairman = Util.fillObject(chairman, chairmanArray);
 
   // supervisor 监事
   if(registration.hasOwnProperty('supervisor')) {
@@ -108,7 +80,8 @@ function handleRegistration(registration) {
     var supervisor = {};
   }; 
   var supervisorArray = ['supervisorName', 'supervisorType', 'supervisorIDType', 'supervisorID'] 
-  registration.supervisor = fillObject(supervisor, supervisorArray);
+  registration.supervisor = Util.fillObject(supervisor, supervisorArray);
+
   // manager 经理
   if(registration.hasOwnProperty('manager')) {
     var manager = registration.manager;
@@ -116,7 +89,8 @@ function handleRegistration(registration) {
     var manager = {};
   };         
   var managerArray = ['managerName', 'managerType', 'managerIDType', 'managerID'];
-  registration.manager = fillObject(manager, managerArray);
+
+  registration.manager = Util.fillObject(manager, managerArray);
   if(registration.manager.managerName.trim() === '') {
     registration.manager.managerName = registration.legalPerson.legalPersonName;
     registration.manager.managerID = registration.legalPerson.legalPersonID;
@@ -129,10 +103,11 @@ function handleRegistration(registration) {
     var holders = [];
   };      
   var holdersA = [];
+
   holders.forEach(function(holder) {
     var currentHolder = {};
     var holderArray = ['holderName', 'holderIDType', 'holderID', 'investType'];
-    currentHolder = fillObject(holder, holderArray);
+    currentHolder = Util.fillObject(holder, holderArray);
     currentHolder.investShare = holder.investShare || 0;
     currentHolder.investMoneyAmount = company.moneyAmount * currentHolder.investShare / 100|| 0;
     holdersA.push(currentHolder);
@@ -146,7 +121,7 @@ function handleRegistration(registration) {
     var contractor = {};
   };   
   var contractorArray = ['contractorName', 'contractorTel', 'contractorPhone', 'contractorEmail', 'contractorIDType', 'contractorID'];
-  registration.contractor = fillObject(contractor, contractorArray);
+  registration.contractor = Util.fillObject(contractor, contractorArray);
 
   //financialStaff 财务联络人
   if(registration.hasOwnProperty('financialStaff')) {
@@ -156,7 +131,7 @@ function handleRegistration(registration) {
   };   
 
   var financialStaffArray = ['financialStaffName', 'financialStallTel', 'financialStaffPhone', 'financialStaffEmail', 'financialStaffIDType', 'financialStaffID'];
-  registration.financialStaff = fillObject(financialStaff, financialStaffArray);
+  registration.financialStaff = Util.fillObject(financialStaff, financialStaffArray);
 
   // authorizationFlag  是否需要开业啦代理
 
@@ -170,60 +145,100 @@ function handleRegistration(registration) {
   return registration;  
 }
 
+// ------------------------------------------------
+RegUtil._hktemplateInit = function(registrationOptions) {
+  var _regObj = {};
+
+  var registration = registrationOptions.registration;
+  _regObj.uuid = registrationOptions.uuid;
 
 
-Meteor.methods({
-  "GenerateTemplate": function(options) {
-    console.log('GenerateTemplate called');
-    function HandleTemplate(callback) {
-      if(!options || !options.docId || !options.uuid) {
-        var err = "err: docId should not be null"; 
-        log("err: docId should not be null")
-        callback(err, null);
-      } else {
-        // basic company information 
-        var docId = options.docId;
-        var currentCompany = Company.findOne({docId: docId});
-        if(currentCompany) {
-          var registration = handleRegistration(currentCompany);
-          var companyZone = registration.company.companyZone;
-          var registrationOptions = {
-            registration: registration,
-            uuid: options.uuid
-          }
+  var company = registration.company;
 
-          switch(companyZone) {
-            case '虹口':
-              HandleHKTemplate(registrationOptions, function(err, result) {
-                callback(err, result);
-              });
-              break;
-            case '浦东':
-              HandlePDTemplate(registrationOptions, function(err, result) {
-                callback(err, result);
-              })
-            break;
-            default:
-              HandleHKTemplate(registrationOptions, function(err, result) {
-                callback(err, result);
-              });
-              break;            
-          }
-        } 
-      }      
-    }
-    var handleTemplate = Async.wrap(HandleTemplate);
-    var response = new handleTemplate();
-    return response;
-  }
-})
+  _regObj.companyZone = company.companyZone;
+  _regObj.companyName = company.companyName;
+  _regObj.companyType = company.companyType;
+  _regObj.companyId = company.companyId;
+  _regObj.companyTel = company.companyTel;
+  _regObj.companyZipcode = company.companyZipcode;
+  _regObj.moneyAmount = company.moneyAmount;
+  _regObj.businessScope = company.businessScope;
+  _regObj.businessPeriod = company.businessPeriod;
 
+  _regObj.addressFlag = registration.addressFlag;
+  _regObj.companyAddress = registration.companyAddress;
+  _regObj.productionAddress = registration.productionAddress;
 
+  var legalPerson = registration.legalPerson;
 
+  _regObj.legalPersonName = legalPerson.legalPersonName;
+  _regObj.legalPersonTel = legalPerson.legalPersonTel;
+  _regObj.legalPersonPhone = legalPerson.legalPersonPhone;
+  _regObj.legalPersonEmail = legalPerson.legalPersonEmail;
+  _regObj.legalPersonIDType = legalPerson.legalPersonIDType;
+  _regObj.legalPersonID = legalPerson.legalPersonID;
+
+  var chairman = registration.chairman;
+
+  _regObj.chairmanName = chairman.chairmanName;
+  _regObj.chairmanType = chairman.chairmanType;
+  _regObj.chairmanIDType = chairman.chairmanIDType;
+  _regObj.chairmanID = chairman.chairmanID;
+  _regObj.chairmanPhone = chairman.chairmanPhone;
+
+  var supervisor = registration.supervisor;
+
+  _regObj.supervisorName = supervisor.supervisorName;
+  _regObj.supervisorType = supervisor.supervisorType;
+  _regObj.supervisorIDType = supervisor.supervisorIDType;
+  _regObj.supervisorID = supervisor.supervisorID;
+
+  var manager = registration.manager;
+
+  _regObj.managerName = manager.managerName;
+  _regObj.managerType = manager.managerType;
+  _regObj.managerIDType = manager.managerIDType;
+  _regObj.managerID = manager.managerID;
 
 
+  var contractor = registration.contractor;
 
-function HandleHKTemplate(registrationOptions, callback) {
+  _regObj.contractorName = contractor.contractorName;
+  _regObj.contractorTel = contractor.contractorTel;
+  _regObj.contractorPhone = contractor.contractorPhone;
+  _regObj.contractorEmail = contractor.contractorEmail;
+  _regObj.contractorIDType = contractor.contractorIDType;
+  _regObj.contractorID = contractor.contractorID;
+
+  var financialStaff = registration.financialStaff;
+
+  _regObj.financialStaffName = financialStaff.financialStaffName;
+  _regObj.financialStallTel = financialStaff.financialStallTel;
+  _regObj.financialStaffPhone = financialStaff.financialStaffPhone;
+  _regObj.financialStaffEmail = financialStaff.financialStaffEmail;
+  _regObj.financialStaffIDType = financialStaff.financialStaffIDType;
+  _regObj.financialStaffID = financialStaff.financialStaffID;
+
+  _regObj.authorizationFlag = registration.authorizationFlag;
+
+  _regObj.createTime = registration.createTime;  
+
+  var year = _regObj.createTime.getFullYear();
+  var month = _regObj.createTime.getMonth() + 1;
+  var day = '28';
+
+  _regObj.investDate = (year + 10) + '年' + month + '月' + day + '日';
+  _regObj.mettingDate = year + '年' + month + '月' + day + '日';
+
+  return _regObj;
+}
+
+
+// ------------------------------------------------
+
+ RegUtil.HandleHKTemplate = function(registrationOptions, callback) {
+  log("HandleHKTemplate: Hi I am called.");
+  
   var registration = registrationOptions.registration;
   var uuid = registrationOptions.uuid;
   var files = [
@@ -354,7 +369,8 @@ function HandleHKTemplate(registrationOptions, callback) {
       holderName: holderName[0],
       investDate: investDateOutput[0],
       investType: investType[0],
-      investMoney: investMoneyAmount[0]
+      investMoney: investMoneyAmount[0],
+      registeredCapital: investMoneyAmount[0]
     }
 
   } else {
@@ -373,7 +389,8 @@ function HandleHKTemplate(registrationOptions, callback) {
       holderName: holderName,
       investDate: investDateOutput,
       investType: investType,
-      investMoney: investMoneyAmount
+      investMoney: investMoneyAmount,
+      registeredCapital: investMoneyAmount
     }
   }  
   var requests = [];
@@ -466,91 +483,54 @@ function HandleHKTemplate(registrationOptions, callback) {
   }
 
   requests.push(registrationBook);
+  var commitment = {
+    fileName: 'K0211090701',
+    cnLabel : '广告企业告知承诺书'
+  };
 
+  requests.push(commitment);
 
-    var commitment = {
-      fileName: 'K0211090701',
-      cnLabel : '广告企业告知承诺书'
+  var appraise = {
+    fileName: 'K0211090801',
+    cnLabel : '小型微型企业认定申请表'
+  };
+  requests.push(appraise);
+
+  var companyIdApplication = {
+    fileName: 'K0211090901',
+    cnLabel : '上海市组织机构代码申请表'
+  };
+
+  requests.push(companyIdApplication);
+
+  var note = {
+    fileName: 'K0211091001',
+    cnLabel : '情况说明'
+  };
+
+  requests.push(note);
+
+  requests.forEach(function(request) {
+    var fileName = request.fileName;
+    var cnLabel = request.cnLabel;
+    var randomStr = uuid;
+    delete request.fileName;
+    delete request.cnLabel;
+
+    var paramsObj = {
+      fileName: fileName,
+      cnLabel: cnLabel,
+      randomStr: randomStr,
+      fileData: request
     };
 
-    requests.push(commitment);
-
-    var appraise = {
-      fileName: 'K0211090801',
-      cnLabel : '小型微型企业认定申请表'
-    };
-    requests.push(appraise);
-
-    var companyIdApplication = {
-      fileName: 'K0211090901',
-      cnLabel : '上海市组织机构代码申请表'
-    };
-
-    requests.push(companyIdApplication);
-
-    var note = {
-      fileName: 'K0211091001',
-      cnLabel : '情况说明'
-    };
-
-    requests.push(note);
-
-
-    requests.forEach(function(request) {
-      var fileName = request.fileName;
-      var cnLabel = request.cnLabel;
-      var randomStr = uuid;
-      delete request.fileName;
-      delete request.cnLabel;
-      fileData = JSON.stringify(request);
-
-      var params = {
-        fileName: fileName,
-        cnLabel: cnLabel,
-        randomStr: randomStr,
-        fileData: fileData
-      }
-
-
-      log(params)
-
-      HTTP.call('POST',requestUrl, {
-        params: params
-      }, function(err, result) {
-        if(!err && querystring.parse(result.content).result === 'success') {
-          var handleFlag = 'true';          
-          var resultString = querystring.parse(result.content).resultString;
-
-          log('resultString: ', resultString);
-
-          HandleResults.insert({
-            uuid: uuid,
-            handleFlag: handleFlag,
-            wordURI: requestUrl+ 'output/' + resultString + '.doc',
-            pdfURI: requestUrl+ 'output/' + resultString + '.pdf',
-            fileName: fileName,
-            cnLabel: cnLabel,
-            createDate: new Date()
-          }, function(err) {
-            if(err) {
-              log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db error', err);
-              callback(err, null);
-            } else {
-              log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db succeed!');
-              callback(null, null);
-            }
-          })
-        } else {
-          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err);
-          callback(err, null);
-        } 
-      })
-    })
-
+   Util.getTemplateService(paramsObj);
+  })
 }
 
+// ------------------------------------------------
 
-function HandlePDTemplate(registrationOptions, callback) {
+RegUtil.HandlePDTemplate = function(registrationOptions, callback) {
   var registration = registrationOptions.registration;
   var uuid = registrationOptions.uuid;
   var files = [
@@ -681,7 +661,8 @@ function HandlePDTemplate(registrationOptions, callback) {
       holderName: holderName[0],
       investDate: investDateOutput[0],
       investType: investType[0],
-      investMoney: investMoneyAmount[0]
+      investMoney: investMoneyAmount[0],
+      registeredCapital: investMoneyAmount[0]
     }
 
   } else {
@@ -702,7 +683,8 @@ function HandlePDTemplate(registrationOptions, callback) {
       share: investShare,
       investDate: investDateOutput,
       investType: investType,
-      investMoney: investMoneyAmount
+      investMoney: investMoneyAmount,
+      registeredCapital: investMoneyAmount
     }
   }  
   var requests = [];
@@ -797,88 +779,55 @@ function HandlePDTemplate(registrationOptions, callback) {
   requests.push(registrationBook);
 
 
-    var commitment = {
-      fileName: 'K0211020701',
-      cnLabel : '广告企业告知承诺书'
+  var commitment = {
+    fileName: 'K0211020701',
+    cnLabel : '广告企业告知承诺书'
+  };
+
+  requests.push(commitment);
+
+  var appraise = {
+    fileName: 'K0211020801',
+    cnLabel : '小型微型企业认定申请表'
+  };
+  requests.push(appraise);
+
+  var companyIdApplication = {
+    fileName: 'K0211020901',
+    cnLabel : '上海市组织机构代码申请表'
+  };
+
+  requests.push(companyIdApplication);
+
+  var cogeneration = {
+    fileName: 'K0211021001',
+    cnLabel : '联动登记申请单',
+    companyName: companyName,
+    companyAddress: companyAddress,
+    legalPersonName: legalPersonName,
+    legalPersonPhone: legalPersonPhone,
+    companyType: companyType,
+    zipcode: companyZipcode    
+  }
+  requests.push(cogeneration);
+
+  requests.forEach(function(request) {
+    var fileName = request.fileName;
+    var cnLabel = request.cnLabel;
+    var randomStr = uuid;
+    delete request.fileName;
+    delete request.cnLabel;
+
+    var paramsObj = {
+      fileName: fileName,
+      cnLabel: cnLabel,
+      randomStr: randomStr,
+      fileData: request
     };
 
-    requests.push(commitment);
-
-    var appraise = {
-      fileName: 'K0211020801',
-      cnLabel : '小型微型企业认定申请表'
-    };
-    requests.push(appraise);
-
-    var companyIdApplication = {
-      fileName: 'K0211020901',
-      cnLabel : '上海市组织机构代码申请表'
-    };
-
-    requests.push(companyIdApplication);
-
-    var cogeneration = {
-      fileName: 'K0211021001',
-      cnLabel : '联动登记申请单',
-      companyName: companyName,
-      companyAddress: companyAddress,
-      legalPersonName: legalPersonName,
-      legalPersonPhone: legalPersonPhone,
-      companyType: companyType,
-      zipcode: companyZipcode    
-    }
-    requests.push(cogeneration);
-
-    requests.forEach(function(request) {
-      var fileName = request.fileName;
-      var cnLabel = request.cnLabel;
-      var randomStr = uuid;
-      delete request.fileName;
-      delete request.cnLabel;
-      fileData = JSON.stringify(request);
-
-      var params = {
-        fileName: fileName,
-        cnLabel: cnLabel,
-        randomStr: randomStr,
-        fileData: fileData
-      }
-
-
-      log(params)
-
-      HTTP.call('POST',requestUrl, {
-        params: params
-      }, function(err, result) {
-        if(!err && querystring.parse(result.content).result === 'success') {
-          var handleFlag = 'true';          
-          var resultString = querystring.parse(result.content).resultString;
-
-          log('resultString: ', resultString);
-
-          HandleResults.insert({
-            uuid: uuid,
-            handleFlag: handleFlag,
-            wordURI: requestUrl+ 'output/' + resultString + '.doc',
-            pdfURI: requestUrl+ 'output/' + resultString + '.pdf',
-            fileName: fileName,
-            cnLabel: cnLabel,
-            createDate: new Date()
-          }, function(err) {
-            if(err) {
-              log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db error', err);
-              callback(err, null);
-            } else {
-              log(cnLabel + ' [ ' + fileName + ' ] ' + 'save handle results to db succeed!');
-              callback(null, null);
-            }
-          })
-        } else {
-          log(cnLabel + ' [ ' + fileName + ' ] ' + 'handle error,try again.', err);
-          callback(null, null);
-        } 
-      })
-    })
-
+    Util.getTemplateService(paramsObj);
+  })
 }
 
+
+// ------------------------------------------------
