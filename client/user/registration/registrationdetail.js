@@ -92,9 +92,9 @@ Template.CompanyDetail.events({
           console.log("generate template error", err);
         } else {
           console.log("generate template succeed");
+          Router.go("/template?uuid=" + uuid + '&type=registration&zone=' + zone + '&holdernum=' + holdernum);
         }
       })
-      Router.go("/template?uuid=" + uuid + '&type=registration&zone=' + zone + '&holdernum=' + holdernum);
     }
   }
 })

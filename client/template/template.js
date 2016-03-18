@@ -38,7 +38,7 @@ Template.template.helpers({
       zone: zone,
       holdernum: holdernum
     });
-
+    
     if (docNum) {
       Session.set("allDocNum", docNum.num);
       return docNum.num;
@@ -71,22 +71,4 @@ Template.template.helpers({
     }
   }
 })
-
-Template.template.onRendered(function() {
-  var self = this;
-  Tracker.autorun(function () {
-    var uuid = Session.get("uuid") || "";
-    var count = HandleResults.find({'uuid': uuid}).count();
-    console.log(count)
-    Session.set("count", count);
-  });
-})
-
-
-
-
-
-
-
-
 

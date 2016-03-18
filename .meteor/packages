@@ -26,7 +26,6 @@ iron:router
 momentjs:moment
 twbs:bootstrap
 
-meteorhacks:npm
 npm-container
 
 frozeman:storage
